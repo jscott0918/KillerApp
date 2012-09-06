@@ -1,4 +1,4 @@
 KillerApp
 =========
 
-A lightweight Android App to play NFC-based capture the flag, tag, and "Assassin"
+A lightweight Android App to play NFC-based Capture the Flag, Tag, and "Assassins"
