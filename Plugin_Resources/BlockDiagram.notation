@@ -68,7 +68,7 @@
           <children xmi:type="notation:DecorationNode" xmi:id="_hk0T1fuWEeG4DoZYxU1qAw" type="6048"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_hk0T1vuWEeG4DoZYxU1qAw" type="6049"/>
           <element xmi:type="uml:Constraint" href="BlockDiagram.uml#_hkvbUPuWEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hkzFsfuWEeG4DoZYxU1qAw" x="235" y="346"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hkzFsfuWEeG4DoZYxU1qAw" x="484" y="299"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_trIlYPuWEeG4DoZYxU1qAw" type="3120" fontName="Segoe UI" lineColor="0">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_trJMcPuWEeG4DoZYxU1qAw" source="ShadowFigure">
@@ -83,7 +83,7 @@
           <children xmi:type="notation:DecorationNode" xmi:id="_trJzhfuWEeG4DoZYxU1qAw" type="6048"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_trKakPuWEeG4DoZYxU1qAw" type="6049"/>
           <element xmi:type="uml:Constraint" href="BlockDiagram.uml#_trDs4PuWEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_trIlYfuWEeG4DoZYxU1qAw" x="379" y="346"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_trIlYfuWEeG4DoZYxU1qAw" x="565" y="389"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_A8aBwPuXEeG4DoZYxU1qAw" type="3120" fontName="Segoe UI" lineColor="0">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_A8ao0PuXEeG4DoZYxU1qAw" source="ShadowFigure">
@@ -98,7 +98,7 @@
           <children xmi:type="notation:DecorationNode" xmi:id="_A8bP4vuXEeG4DoZYxU1qAw" type="6048"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_A8bP4_uXEeG4DoZYxU1qAw" type="6049"/>
           <element xmi:type="uml:Constraint" href="BlockDiagram.uml#_A8VwUPuXEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_A8aBwfuXEeG4DoZYxU1qAw" x="535" y="346"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_A8aBwfuXEeG4DoZYxU1qAw" x="682" y="299"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_QaLXUPuXEeG4DoZYxU1qAw" type="3120" fontName="Segoe UI" lineColor="0">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_QaL-YPuXEeG4DoZYxU1qAw" source="ShadowFigure">
@@ -113,7 +113,7 @@
           <children xmi:type="notation:DecorationNode" xmi:id="_QaMldfuXEeG4DoZYxU1qAw" type="6048"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_QaNMgPuXEeG4DoZYxU1qAw" type="6049"/>
           <element xmi:type="uml:Constraint" href="BlockDiagram.uml#_QaGe0PuXEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QaLXUfuXEeG4DoZYxU1qAw" x="91" y="346"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_QaLXUfuXEeG4DoZYxU1qAw" x="376" y="452"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_m1P2MPuXEeG4DoZYxU1qAw" type="shape_sysml_blockproperty_as_composite" fontName="Segoe UI" lineColor="0">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_m1RrYvuXEeG4DoZYxU1qAw" source="ShadowFigure">
@@ -130,7 +130,7 @@
             <styles xmi:type="notation:TitleStyle" xmi:id="_m1RrYfuXEeG4DoZYxU1qAw"/>
           </children>
           <element xmi:type="uml:Property" href="BlockDiagram.uml#_l1fCUPuXEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_m1P2MfuXEeG4DoZYxU1qAw" x="763" y="298" width="133" height="73"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_m1P2MfuXEeG4DoZYxU1qAw" x="862" y="182" width="133" height="73"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_0IcxoPuXEeG4DoZYxU1qAw" type="shape_sysml_blockproperty_as_composite" fontName="Segoe UI" lineColor="0">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_0IdYsvuXEeG4DoZYxU1qAw" source="ShadowFigure">
@@ -147,7 +147,7 @@
             <styles xmi:type="notation:TitleStyle" xmi:id="_0IdYsfuXEeG4DoZYxU1qAw"/>
           </children>
           <element xmi:type="uml:Property" href="BlockDiagram.uml#_xFjoYPuXEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0IcxofuXEeG4DoZYxU1qAw" x="907" y="262" width="133" height="73"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0IcxofuXEeG4DoZYxU1qAw" x="1024" y="110" width="133" height="73"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_BAdl4PuYEeG4DoZYxU1qAw" type="shape_sysml_blockproperty_as_composite" fontName="Segoe UI" lineColor="0">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_BAe0APuYEeG4DoZYxU1qAw" source="ShadowFigure">
@@ -164,7 +164,7 @@
             <styles xmi:type="notation:TitleStyle" xmi:id="_BAeM8vuYEeG4DoZYxU1qAw"/>
           </children>
           <element xmi:type="uml:Property" href="BlockDiagram.uml#_AXfhYPuYEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BAdl4fuYEeG4DoZYxU1qAw" x="1039" y="166" width="145" height="73"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BAdl4fuYEeG4DoZYxU1qAw" x="952" y="20" width="145" height="73"/>
         </children>
         <children xmi:type="notation:Shape" xmi:id="_SdePUPuYEeG4DoZYxU1qAw" type="3120" fontName="Segoe UI" lineColor="0">
           <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Sde2YPuYEeG4DoZYxU1qAw" source="ShadowFigure">
@@ -179,12 +179,44 @@
           <children xmi:type="notation:DecorationNode" xmi:id="_SdfdcfuYEeG4DoZYxU1qAw" type="6048"/>
           <children xmi:type="notation:DecorationNode" xmi:id="_SdfdcvuYEeG4DoZYxU1qAw" type="6049"/>
           <element xmi:type="uml:Constraint" href="BlockDiagram.uml#_SdZ94PuYEeG4DoZYxU1qAw"/>
-          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SdePUfuYEeG4DoZYxU1qAw" x="871" y="418"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_SdePUfuYEeG4DoZYxU1qAw" x="1024" y="272"/>
+        </children>
+        <children xmi:type="notation:Shape" xmi:id="_uwHaAPuiEeG-kvyVSZOijQ" type="shape_sysml_blockproperty_as_composite" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_uwJPMPuiEeG-kvyVSZOijQ" source="ShadowFigure">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_uwJPMfuiEeG-kvyVSZOijQ" key="ShadowFigure_Value" value="false"/>
+          </eAnnotations>
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_uwJPMvuiEeG-kvyVSZOijQ" source="displayNameLabelIcon">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_uwJPM_uiEeG-kvyVSZOijQ" key="displayNameLabelIcon_value" value="false"/>
+          </eAnnotations>
+          <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_uwJPNPuiEeG-kvyVSZOijQ" source="QualifiedName">
+            <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_uwJPNfuiEeG-kvyVSZOijQ" key="QualifiedNameDepth" value="1000"/>
+          </eAnnotations>
+          <children xmi:type="notation:DecorationNode" xmi:id="_uwIBEPuiEeG-kvyVSZOijQ" type="label_uml_property_label"/>
+          <children xmi:type="notation:BasicCompartment" xmi:id="_uwIoIPuiEeG-kvyVSZOijQ" type="compartment_sysml_blockproperty_structure">
+            <styles xmi:type="notation:TitleStyle" xmi:id="_uwIoIfuiEeG-kvyVSZOijQ"/>
+          </children>
+          <element xmi:type="uml:Property" href="BlockDiagram.uml#_n8piIPuiEeG-kvyVSZOijQ"/>
+          <layoutConstraint xmi:type="notation:Bounds" xmi:id="_uwHaAfuiEeG-kvyVSZOijQ" x="188" y="344" width="200" height="100"/>
         </children>
         <styles xmi:type="notation:TitleStyle" xmi:id="_eybeBPuREeG4DoZYxU1qAw"/>
       </children>
       <element xmi:type="uml:Class" href="BlockDiagram.uml#_enbu8PuREeG4DoZYxU1qAw"/>
       <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eybeBfuREeG4DoZYxU1qAw" x="-48" y="-96" width="1321" height="649"/>
+    </children>
+    <children xmi:type="notation:Shape" xmi:id="_Y4HL8PuiEeG-kvyVSZOijQ" type="2114" fontName="Lucida Grande" fontHeight="11" lineColor="0">
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Y4JBIPuiEeG-kvyVSZOijQ" source="ShadowFigure">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Y4JBIfuiEeG-kvyVSZOijQ" key="ShadowFigure_Value" value="false"/>
+      </eAnnotations>
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Y4JBIvuiEeG-kvyVSZOijQ" source="displayNameLabelIcon">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Y4JBI_uiEeG-kvyVSZOijQ" key="displayNameLabelIcon_value" value="false"/>
+      </eAnnotations>
+      <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_Y4JBJPuiEeG-kvyVSZOijQ" source="QualifiedName">
+        <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_Y4JBJfuiEeG-kvyVSZOijQ" key="QualifiedNameDepth" value="1000"/>
+      </eAnnotations>
+      <children xmi:type="notation:DecorationNode" xmi:id="_Y4JoMPuiEeG-kvyVSZOijQ" type="5197"/>
+      <children xmi:type="notation:DecorationNode" xmi:id="_Y4JoMfuiEeG-kvyVSZOijQ" type="6039"/>
+      <element xmi:type="uml:Constraint" href="BlockDiagram.uml#_A8VwUPuXEeG4DoZYxU1qAw"/>
+      <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y4HL8fuiEeG-kvyVSZOijQ" x="765" y="272"/>
     </children>
     <styles xmi:type="notation:DiagramStyle" xmi:id="_eybeBvuREeG4DoZYxU1qAw"/>
     <element xmi:type="uml:Class" href="BlockDiagram.uml#_enbu8PuREeG4DoZYxU1qAw"/>

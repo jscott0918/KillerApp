@@ -41,6 +41,10 @@
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_BAW4MPuYEeG4DoZYxU1qAw" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_BAWRIPuYEeG4DoZYxU1qAw" value="1"/>
       </ownedAttribute>
+      <ownedAttribute xmi:id="_n8piIPuiEeG-kvyVSZOijQ" name="" type="_ixmZkPuiEeG-kvyVSZOijQ" aggregation="composite" association="_uwChgPuiEeG-kvyVSZOijQ">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uwBTYPuiEeG-kvyVSZOijQ" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uwAsUPuiEeG-kvyVSZOijQ" value="1"/>
+      </ownedAttribute>
       <ownedConnector xmi:id="_PA8wAPuWEeG4DoZYxU1qAw" name="">
         <end xmi:id="_PA9-IPuWEeG4DoZYxU1qAw" role="_HLw8cPuWEeG4DoZYxU1qAw">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_PA9-IfuWEeG4DoZYxU1qAw" value="1"/>
@@ -143,6 +147,13 @@
     </packagedElement>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_Vza3cPuYEeG4DoZYxU1qAw" name="" supplier="_xFjoYPuXEeG4DoZYxU1qAw" client="_SdZ94PuYEeG4DoZYxU1qAw"/>
     <packagedElement xmi:type="uml:Dependency" xmi:id="_Wrfu8PuYEeG4DoZYxU1qAw" name="" supplier="_l1fCUPuXEeG4DoZYxU1qAw" client="_SdZ94PuYEeG4DoZYxU1qAw"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="_ixmZkPuiEeG-kvyVSZOijQ" name="Competition"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_uwChgPuiEeG-kvyVSZOijQ" name="Association7" memberEnd="_n8piIPuiEeG-kvyVSZOijQ _uwChg_uiEeG-kvyVSZOijQ">
+      <eAnnotations xmi:id="_uwChgfuiEeG-kvyVSZOijQ" source="org.eclipse.papyrus">
+        <details xmi:id="_uwChgvuiEeG-kvyVSZOijQ" key="nature" value="SysML_Nature"/>
+      </eAnnotations>
+      <ownedEnd xmi:id="_uwChg_uiEeG-kvyVSZOijQ" name="" type="_enbu8PuREeG4DoZYxU1qAw" association="_uwChgPuiEeG-kvyVSZOijQ"/>
+    </packagedElement>
     <profileApplication xmi:id="_eYQqgPuREeG4DoZYxU1qAw">
       <eAnnotations xmi:id="_eYZ0cPuREeG4DoZYxU1qAw" source="http://www.eclipse.org/uml2/2.0.0/UML">
         <references xmi:type="ecore:EPackage" href="http://www.eclipse.org/papyrus/0.7.0/SysML#/"/>
@@ -220,4 +231,5 @@
   <Blocks:Block xmi:id="_m1ML0PuXEeG4DoZYxU1qAw" base_Class="_m1KWoPuXEeG4DoZYxU1qAw"/>
   <Blocks:Block xmi:id="_0IYgMPuXEeG4DoZYxU1qAw" base_Class="_0IWrAPuXEeG4DoZYxU1qAw"/>
   <Blocks:Block xmi:id="_BAZUcPuYEeG4DoZYxU1qAw" base_Class="_BAXfQPuYEeG4DoZYxU1qAw"/>
+  <Blocks:Block xmi:id="_ixr5IPuiEeG-kvyVSZOijQ" base_Class="_ixmZkPuiEeG-kvyVSZOijQ"/>
 </xmi:XMI>
