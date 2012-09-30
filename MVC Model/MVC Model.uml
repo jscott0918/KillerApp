@@ -7,13 +7,14 @@
         <ownedAttribute xmi:id="_gH9R0AXqEeKrO7m3SnllyA" name="Serializable"/>
         <ownedAttribute xmi:id="_iF7aYAXqEeKrO7m3SnllyA" name="Static"/>
         <ownedAttribute xmi:id="_i6hcoAaFEeKDzqAuHGoRIA" name="EventList" visibility="protected"/>
+        <ownedAttribute xmi:id="_sW7RAAs4EeKT3eejSMU6Og" name="ArrayList"/>
         <interfaceRealization xmi:id="_DnOuMAXoEeKrO7m3SnllyA" name="InterfaceRealization1" supplier="_8EJXQAXnEeKrO7m3SnllyA" client="_wUR20AXnEeKrO7m3SnllyA" contract="_8EJXQAXnEeKrO7m3SnllyA"/>
         <interfaceRealization xmi:id="_V4A5wAXvEeKrO7m3SnllyA" name="InterfaceRealization2" supplier="_pPjIcAXqEeKrO7m3SnllyA" client="_wUR20AXnEeKrO7m3SnllyA" contract="_pPjIcAXqEeKrO7m3SnllyA"/>
         <ownedOperation xmi:id="_JIgMIAXtEeKrO7m3SnllyA" name="AddEvent"/>
         <ownedOperation xmi:id="_LFGbsAXtEeKrO7m3SnllyA" name="GetEvents">
           <ownedParameter xmi:id="_VV-1oAXtEeKrO7m3SnllyA" name="return" type="_rsdOsAa5EeKrO7m3SnllyA" direction="return"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_Rgr_EAXtEeKrO7m3SnllyA" name="MergeList" isStatic="true"/>
+        <ownedOperation xmi:id="_Rgr_EAXtEeKrO7m3SnllyA" name="UpdateList" isStatic="true"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_eh6WgAXpEeKrO7m3SnllyA" name="PlayerData">
         <ownedAttribute xmi:id="_TAQ00AaEEeKDzqAuHGoRIA" name="UserName"/>
@@ -24,8 +25,9 @@
         <ownedOperation xmi:id="_Z_1qwAXvEeKrO7m3SnllyA" name="GetEvents">
           <ownedParameter xmi:id="_Z_1qwQXvEeKrO7m3SnllyA" name="return" type="_rsdOsAa5EeKrO7m3SnllyA" direction="return"/>
         </ownedOperation>
-        <ownedOperation xmi:id="_bsuDUAXvEeKrO7m3SnllyA" name="MergeList" isStatic="true"/>
+        <ownedOperation xmi:id="_bsuDUAXvEeKrO7m3SnllyA" name="UpdateList" isStatic="true"/>
       </packagedElement>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_SYmvYAa6EeKrO7m3SnllyA" name="ArrayList"/>
       <packagedElement xmi:type="uml:Class" xmi:id="_rsdOsAa5EeKrO7m3SnllyA" name="Event" visibility="protected">
         <ownedAttribute xmi:id="_OKJhEAXtEeKrO7m3SnllyA" name="Date"/>
         <ownedAttribute xmi:id="_tvk9AAa5EeKrO7m3SnllyA" name="Time"/>
@@ -38,7 +40,6 @@
         </ownedOperation>
         <ownedOperation xmi:id="_GznpQAa6EeKrO7m3SnllyA" name="getDefender"/>
       </packagedElement>
-      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_SYmvYAa6EeKrO7m3SnllyA" name="ArrayList"/>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_LHJ44AXnEeKrO7m3SnllyA" name="View">
       <packageImport xmi:id="_jysToAXpEeKrO7m3SnllyA" importedPackage="_L9Y9UAXnEeKrO7m3SnllyA"/>
@@ -80,8 +81,13 @@
           <ownedParameter xmi:id="_1bdYsAa7EeKrO7m3SnllyA" name="return" direction="return"/>
         </ownedOperation>
       </packagedElement>
-      <packagedElement xmi:type="uml:Enumeration" xmi:id="_n_I7YAXoEeKrO7m3SnllyA" name="ActionType"/>
-      <packagedElement xmi:type="uml:Interface" xmi:id="_7oNEQAa6EeKrO7m3SnllyA" name="ChangeMode">
+      <packagedElement xmi:type="uml:Enumeration" xmi:id="_n_I7YAXoEeKrO7m3SnllyA" name="ActionType">
+        <ownedLiteral xmi:id="_O9EQgAs3EeKT3eejSMU6Og" name="Attack"/>
+        <ownedLiteral xmi:id="_QZ3lsAs3EeKT3eejSMU6Og" name="Defense"/>
+        <ownedLiteral xmi:id="_SaNs0As3EeKT3eejSMU6Og" name="Neutral"/>
+        <ownedLiteral xmi:id="_Vd1O0As3EeKT3eejSMU6Og" name="Disabled"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_7oNEQAa6EeKrO7m3SnllyA" name="ChangeMode" clientDependency="_T_oygAs3EeKT3eejSMU6Og">
         <ownedOperation xmi:id="_-UHQ4Aa6EeKrO7m3SnllyA" name="SetMode"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_Hx5kgAa8EeKrO7m3SnllyA" name="ModelUpdate">
@@ -149,6 +155,37 @@
       <ownedEnd xmi:id="_oAz8BAa8EeKrO7m3SnllyA" name="updateInteraction" type="_pPjIcAXqEeKrO7m3SnllyA" association="_oAz8AAa8EeKrO7m3SnllyA">
         <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oAz8BQa8EeKrO7m3SnllyA" value="1"/>
         <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oAz8Bga8EeKrO7m3SnllyA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Dependency" xmi:id="_T_oygAs3EeKT3eejSMU6Og" name="Dependency2" supplier="_n_I7YAXoEeKrO7m3SnllyA" client="_7oNEQAa6EeKrO7m3SnllyA"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_nfMGAAs4EeKT3eejSMU6Og" name="A_&lt;arrayList>_&lt;interactionHistory>" memberEnd="_nfMGAQs4EeKT3eejSMU6Og _nfMGBAs4EeKT3eejSMU6Og">
+      <ownedEnd xmi:id="_nfMGAQs4EeKT3eejSMU6Og" name="arrayList" type="_SYmvYAa6EeKrO7m3SnllyA" association="_nfMGAAs4EeKT3eejSMU6Og">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nfMGAgs4EeKT3eejSMU6Og" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nfMGAws4EeKT3eejSMU6Og" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_nfMGBAs4EeKT3eejSMU6Og" name="interactionHistory" type="_wUR20AXnEeKrO7m3SnllyA" association="_nfMGAAs4EeKT3eejSMU6Og">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_nfMGBQs4EeKT3eejSMU6Og" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_nfMGBgs4EeKT3eejSMU6Og" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_oLB4UAs4EeKT3eejSMU6Og" name="A_&lt;arrayList>_&lt;event>" memberEnd="_oLB4UQs4EeKT3eejSMU6Og _oLB4VAs4EeKT3eejSMU6Og">
+      <ownedEnd xmi:id="_oLB4UQs4EeKT3eejSMU6Og" name="arrayList" type="_SYmvYAa6EeKrO7m3SnllyA" association="_oLB4UAs4EeKT3eejSMU6Og">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oLB4Ugs4EeKT3eejSMU6Og" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oLB4Uws4EeKT3eejSMU6Og" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_oLB4VAs4EeKT3eejSMU6Og" name="event" type="_rsdOsAa5EeKrO7m3SnllyA" association="_oLB4UAs4EeKT3eejSMU6Og">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_oLB4VQs4EeKT3eejSMU6Og" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_oLB4Vgs4EeKT3eejSMU6Og" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_xH33gAs4EeKT3eejSMU6Og" name="" memberEnd="_xH4ekAs4EeKT3eejSMU6Og _xH4ekws4EeKT3eejSMU6Og">
+      <ownedEnd xmi:id="_xH4ekAs4EeKT3eejSMU6Og" name="event" type="_rsdOsAa5EeKrO7m3SnllyA" isUnique="false" association="_xH33gAs4EeKT3eejSMU6Og">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xH4ekQs4EeKT3eejSMU6Og" value="1000"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xH4ekgs4EeKT3eejSMU6Og" value="1"/>
+      </ownedEnd>
+      <ownedEnd xmi:id="_xH4ekws4EeKT3eejSMU6Og" name="interactionHistory" type="_wUR20AXnEeKrO7m3SnllyA" isUnique="false" association="_xH33gAs4EeKT3eejSMU6Og">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xH4elAs4EeKT3eejSMU6Og" value="1"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xH4elQs4EeKT3eejSMU6Og" value="1"/>
       </ownedEnd>
     </packagedElement>
   </packagedElement>
