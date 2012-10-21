@@ -3,11 +3,22 @@
   <packagedElement xmi:type="uml:Package" xmi:id="_w8IxIM37EdqwVrslYOdUDA" name="MVC Model">
     <packagedElement xmi:type="uml:Package" xmi:id="_JVrUMAXnEeKrO7m3SnllyA" name="Model">
       <packageImport xmi:id="_i8UsUAXpEeKrO7m3SnllyA" importedPackage="_L9Y9UAXnEeKrO7m3SnllyA"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_wUR20AXnEeKrO7m3SnllyA" name="InteractionHistory" visibility="package" clientDependency="_DnOuMAXoEeKrO7m3SnllyA _V4A5wAXvEeKrO7m3SnllyA">
+      <packagedElement xmi:type="uml:Class" xmi:id="_wUR20AXnEeKrO7m3SnllyA" name="InteractionHistory" visibility="package" clientDependency="_DnOuMAXoEeKrO7m3SnllyA _V4A5wAXvEeKrO7m3SnllyA" classifierBehavior="_xjS4YBvEEeKFPb8RySKBLg">
         <ownedAttribute xmi:id="_gH9R0AXqEeKrO7m3SnllyA" name="Serializable"/>
         <ownedAttribute xmi:id="_iF7aYAXqEeKrO7m3SnllyA" name="Static"/>
         <ownedAttribute xmi:id="_i6hcoAaFEeKDzqAuHGoRIA" name="EventList" visibility="protected"/>
         <ownedAttribute xmi:id="_sW7RAAs4EeKT3eejSMU6Og" name="ArrayList"/>
+        <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_xjS4YBvEEeKFPb8RySKBLg" name="StateMachine">
+          <region xmi:id="_xjS4YRvEEeKFPb8RySKBLg" name="Region">
+            <subvertex xmi:type="uml:State" xmi:id="_4BUrwBvEEeKFPb8RySKBLg" name="UninitializedHistory"/>
+            <subvertex xmi:type="uml:State" xmi:id="_6PX3sBvEEeKFPb8RySKBLg" name="InitializedHistory"/>
+            <subvertex xmi:type="uml:State" xmi:id="_82N-IBvEEeKFPb8RySKBLg" name="HistoryStructuring"/>
+            <transition xmi:id="__O9-NBvEEeKFPb8RySKBLg" name="StructureTable" kind="local" source="_4BUrwBvEEeKFPb8RySKBLg" target="_82N-IBvEEeKFPb8RySKBLg"/>
+            <transition xmi:id="__wXbFBvEEeKFPb8RySKBLg" name="TableBuilt" kind="local" source="_82N-IBvEEeKFPb8RySKBLg" target="_6PX3sBvEEeKFPb8RySKBLg"/>
+            <transition xmi:id="_AP7r8BvFEeKFPb8RySKBLg" name="NewEntries" kind="local" source="_82N-IBvEEeKFPb8RySKBLg" target="_82N-IBvEEeKFPb8RySKBLg"/>
+            <transition xmi:id="_CdvAQxvFEeKFPb8RySKBLg" name="NewEntries" kind="local" source="_6PX3sBvEEeKFPb8RySKBLg" target="_82N-IBvEEeKFPb8RySKBLg"/>
+          </region>
+        </ownedBehavior>
         <interfaceRealization xmi:id="_DnOuMAXoEeKrO7m3SnllyA" name="InterfaceRealization1" supplier="_8EJXQAXnEeKrO7m3SnllyA" client="_wUR20AXnEeKrO7m3SnllyA" contract="_8EJXQAXnEeKrO7m3SnllyA"/>
         <interfaceRealization xmi:id="_V4A5wAXvEeKrO7m3SnllyA" name="InterfaceRealization2" supplier="_pPjIcAXqEeKrO7m3SnllyA" client="_wUR20AXnEeKrO7m3SnllyA" contract="_pPjIcAXqEeKrO7m3SnllyA"/>
         <ownedOperation xmi:id="_JIgMIAXtEeKrO7m3SnllyA" name="AddEvent"/>
@@ -58,15 +69,48 @@
         <ownedAttribute xmi:id="_oxgrEAa6EeKrO7m3SnllyA" name="Columns"/>
       </packagedElement>
       <packagedElement xmi:type="uml:Class" xmi:id="_s0PFQAXsEeKrO7m3SnllyA" name="OptionsMenu"/>
-      <packagedElement xmi:type="uml:Interface" xmi:id="_trxwMAa7EeKrO7m3SnllyA" name="SendNotification"/>
+      <packagedElement xmi:type="uml:Interface" xmi:id="_trxwMAa7EeKrO7m3SnllyA" name="DisplayNotification">
+        <ownedOperation xmi:id="_qBeNEBvBEeKFPb8RySKBLg" name="UpdateNotification">
+          <ownedParameter xmi:id="_rJovABvBEeKFPb8RySKBLg" name="NotificationText" visibility="package" type="_x_P78BvBEeKFPb8RySKBLg"/>
+          <ownedParameter xmi:id="_6C8soBvBEeKFPb8RySKBLg" name="DisplayType" type="_kW0XYBvBEeKFPb8RySKBLg"/>
+        </ownedOperation>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Enumeration" xmi:id="_kW0XYBvBEeKFPb8RySKBLg" name="DisplayType">
+        <ownedLiteral xmi:id="_lR2cQBvBEeKFPb8RySKBLg" name="BannerNotification"/>
+        <ownedLiteral xmi:id="_nBsCMBvBEeKFPb8RySKBLg" name="PushNotification"/>
+        <ownedLiteral xmi:id="_n1LUoBvBEeKFPb8RySKBLg" name="AppNotification"/>
+      </packagedElement>
+      <packagedElement xmi:type="uml:PrimitiveType" xmi:id="_x_P78BvBEeKFPb8RySKBLg" name="String"/>
+      <packagedElement xmi:type="uml:Class" xmi:id="__ru6EBvBEeKFPb8RySKBLg" name="NotificationListener" visibility="package" clientDependency="_HNkT0BvCEeKFPb8RySKBLg">
+        <interfaceRealization xmi:id="_HNkT0BvCEeKFPb8RySKBLg" name="InterfaceRealization1" supplier="_trxwMAa7EeKrO7m3SnllyA" client="__ru6EBvBEeKFPb8RySKBLg" contract="_trxwMAa7EeKrO7m3SnllyA"/>
+        <ownedOperation xmi:id="_DDwl0BvCEeKFPb8RySKBLg" name="UpdateNotification"/>
+      </packagedElement>
     </packagedElement>
     <packagedElement xmi:type="uml:Package" xmi:id="_L9Y9UAXnEeKrO7m3SnllyA" name="Controller">
       <packageImport xmi:id="_kfnrEAXpEeKrO7m3SnllyA" importedPackage="_JVrUMAXnEeKrO7m3SnllyA"/>
       <packageImport xmi:id="_lXGFoAXpEeKrO7m3SnllyA" importedPackage="_LHJ44AXnEeKrO7m3SnllyA"/>
-      <packagedElement xmi:type="uml:Class" xmi:id="_NdjvkAXnEeKrO7m3SnllyA" name="NFC Handler" clientDependency="_D9JV8Aa7EeKrO7m3SnllyA _GCOzIAa7EeKrO7m3SnllyA">
+      <packagedElement xmi:type="uml:Class" xmi:id="_NdjvkAXnEeKrO7m3SnllyA" name="NFC Handler" clientDependency="_D9JV8Aa7EeKrO7m3SnllyA _GCOzIAa7EeKrO7m3SnllyA" classifierBehavior="_m-jjwBvDEeKFPb8RySKBLg">
         <ownedAttribute xmi:id="_Wk9OIAaFEeKDzqAuHGoRIA" name="CurrentState"/>
         <ownedAttribute xmi:id="_vXdrYAa6EeKrO7m3SnllyA" name="Data"/>
         <ownedAttribute xmi:id="_4QRfIAa6EeKrO7m3SnllyA" name="ActionNotifier"/>
+        <ownedBehavior xmi:type="uml:StateMachine" xmi:id="_m-jjwBvDEeKFPb8RySKBLg" name="StateMachine">
+          <region xmi:id="_m-jjwRvDEeKFPb8RySKBLg" name="Region">
+            <subvertex xmi:type="uml:State" xmi:id="_plYcEBvDEeKFPb8RySKBLg" name="Idle"/>
+            <subvertex xmi:type="uml:FinalState" xmi:id="_sqTloBvDEeKFPb8RySKBLg" name="FinalState1"/>
+            <subvertex xmi:type="uml:Pseudostate" xmi:id="_vkhUABvDEeKFPb8RySKBLg" name="Off"/>
+            <subvertex xmi:type="uml:Pseudostate" xmi:id="_E0OL8BvEEeKFPb8RySKBLg" name="Pseudostate1" kind="fork"/>
+            <subvertex xmi:type="uml:State" xmi:id="_KB81EBvEEeKFPb8RySKBLg" name="Active"/>
+            <transition xmi:id="_GS1fABvEEeKFPb8RySKBLg" name="Enabled" kind="local" source="_vkhUABvDEeKFPb8RySKBLg" target="_E0OL8BvEEeKFPb8RySKBLg"/>
+            <transition xmi:id="_INvFdBvEEeKFPb8RySKBLg" name="NoActivity" kind="local" source="_E0OL8BvEEeKFPb8RySKBLg" target="_plYcEBvDEeKFPb8RySKBLg"/>
+            <transition xmi:id="_NGrKUBvEEeKFPb8RySKBLg" name="Activity" kind="local" source="_E0OL8BvEEeKFPb8RySKBLg" target="_KB81EBvEEeKFPb8RySKBLg"/>
+            <transition xmi:id="_PHvqNBvEEeKFPb8RySKBLg" name="IncomingConnection" kind="local" source="_KB81EBvEEeKFPb8RySKBLg" target="_KB81EBvEEeKFPb8RySKBLg"/>
+            <transition xmi:id="_Q98W0BvEEeKFPb8RySKBLg" name="ConnectionTerminated" kind="local" source="_KB81EBvEEeKFPb8RySKBLg" target="_plYcEBvDEeKFPb8RySKBLg"/>
+            <transition xmi:id="_TlJpoBvEEeKFPb8RySKBLg" name="IncomingConnection" kind="local" source="_plYcEBvDEeKFPb8RySKBLg" target="_KB81EBvEEeKFPb8RySKBLg"/>
+            <transition xmi:id="_YW6IcBvEEeKFPb8RySKBLg" name="NFCDisabled" kind="local" source="_plYcEBvDEeKFPb8RySKBLg" target="_sqTloBvDEeKFPb8RySKBLg"/>
+            <transition xmi:id="_b6Uk0BvEEeKFPb8RySKBLg" name="NFCDisabled" kind="local" source="_KB81EBvEEeKFPb8RySKBLg" target="_sqTloBvDEeKFPb8RySKBLg"/>
+            <transition xmi:id="_eYU4UBvEEeKFPb8RySKBLg" name="NoActivity" kind="local" source="_plYcEBvDEeKFPb8RySKBLg" target="_plYcEBvDEeKFPb8RySKBLg"/>
+          </region>
+        </ownedBehavior>
         <interfaceRealization xmi:id="_D9JV8Aa7EeKrO7m3SnllyA" name="InterfaceRealization1" supplier="_7oNEQAa6EeKrO7m3SnllyA" client="_NdjvkAXnEeKrO7m3SnllyA" contract="_7oNEQAa6EeKrO7m3SnllyA"/>
         <ownedOperation xmi:id="_APaqgAa8EeKrO7m3SnllyA" name="AddEvent"/>
         <ownedOperation xmi:id="_CT2AYAa8EeKrO7m3SnllyA" name="NotifyUI"/>
