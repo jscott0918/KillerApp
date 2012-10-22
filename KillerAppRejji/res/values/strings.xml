@@ -1,0 +1,13 @@
+<resources>
+
+    <string name="app_name">KillerApp</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Killer App</string>
+    <string name="attack_button">Attack</string>
+    <integer-array name="cooldown_main">
+        <item >15</item>
+        <item >30</item>
+    </integer-array>
+
+</resources>
