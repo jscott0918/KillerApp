@@ -2,6 +2,7 @@ package com.killerapprejji;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 
@@ -20,7 +21,8 @@ public class MainActivity extends Activity {
     }
     
     public boolean onClickAttackButton(View view){
-    	setContentView(R.layout.activity_attack);
+    	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
+    	startActivityForResult(startNewActivityOpen, 0);
     	return true;
     }
 }
