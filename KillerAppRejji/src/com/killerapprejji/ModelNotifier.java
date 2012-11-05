@@ -1,4 +1,4 @@
-package Controller;
+package com.killerapprejji;
 
 public class ModelNotifier {
 

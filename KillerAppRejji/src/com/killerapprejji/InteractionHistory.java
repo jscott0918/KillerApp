@@ -1,10 +1,10 @@
-package com.model;
+package com.killerapprejji;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class InteractionHistory implements Serializable, UpdateInteraction{
-	public static InteractionHistory interactionHistory;
+public  class InteractionHistory implements Serializable, UpdateInteraction{
+	public static InteractionHistory interactionHistory = null;
 	private static ArrayList<Event> eventList;
 	
 	private InteractionHistory(){
@@ -14,6 +14,13 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 	public boolean addEvent(Event event){
 		eventList.add(event);
 		return true;
+	}
+	
+	public static InteractionHistory getInstance(){
+		if(interactionHistory == null){
+			interactionHistory = new InteractionHistory();
+		}
+		return interactionHistory;
 	}
 	
 	public ArrayList<Event> getEvent(String search){

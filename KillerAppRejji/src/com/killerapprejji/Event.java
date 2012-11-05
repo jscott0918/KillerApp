@@ -1,4 +1,4 @@
-package com.model;
+package com.killerapprejji;
 
 public class Event {
 	private String Date;

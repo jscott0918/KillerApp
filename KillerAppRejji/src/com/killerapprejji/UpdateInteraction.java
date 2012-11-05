@@ -1,4 +1,4 @@
-package com.model;
+package com.killerapprejji;
 
 import java.util.ArrayList;
 
