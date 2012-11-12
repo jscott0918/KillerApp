@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public  class InteractionHistory implements Serializable, UpdateInteraction{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2577026923314776978L;
 	public static InteractionHistory interactionHistory = null;
 	private static ArrayList<Event> eventList;
 	
