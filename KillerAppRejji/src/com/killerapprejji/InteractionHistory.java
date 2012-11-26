@@ -3,20 +3,27 @@ package com.killerapprejji;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public  class InteractionHistory implements Serializable, UpdateInteraction{
+public class InteractionHistory implements Serializable, UpdateInteraction{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -2577026923314776978L;
 	public static InteractionHistory interactionHistory = null;
 	private static ArrayList<Event> eventList;
+	private static String displayName = null;
 	
 	private InteractionHistory(){
 		eventList = new ArrayList<Event>();
+		displayName = new String();
 	}
 	
 	public boolean addEvent(Event event){
 		eventList.add(event);
+		return true;
+	}
+	
+	public boolean setDisplayName(String name){
+		displayName = name;
 		return true;
 	}
 	

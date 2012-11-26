@@ -1,5 +1,5 @@
 package com.killerapprejji;
-//testing
+//testings
 import android.app.Activity;
 import android.os.Bundle;
 
