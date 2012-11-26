@@ -6,6 +6,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
+    <permission></permission>
 
     <application
         android:icon="@drawable/ninjahead"
@@ -13,7 +14,7 @@
         android:theme="@style/AppTheme" android:allowClearUserData="true" android:logo="@drawable/ninjahead" android:persistent="true" android:permission="android.permission.NFC">
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main" android:process="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".AttackActivity" android:theme="@style/AppTheme"></activity>
+        <activity android:launchMode="standard" android:screenOrientation="portrait" android:label="@drawable/ninjahead" android:alwaysRetainTaskState="true" android:noHistory="false" android:description="@string/menu_settings" android:configChanges="keyboard" android:theme="@style/AppTheme" android:parentActivityName="@string/title_activity_main" android:icon="@drawable/ninjahead" android:name="SetInfo"></activity>
     </application>
 
 </manifest>
