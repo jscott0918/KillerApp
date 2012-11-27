@@ -23,8 +23,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="48dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/username" />
+        android:hint="@string/username"
+        android:inputType="textPersonName" />
 
     <Switch
         android:id="@+id/nfc_switch"

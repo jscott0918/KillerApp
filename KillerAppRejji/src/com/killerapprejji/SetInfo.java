@@ -22,13 +22,12 @@ public class SetInfo extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
+	    setContentView(R.layout.set_player_info);
 	    button = (Button)findViewById(R.id.save_player_info_button);
 	    button.setOnClickListener(onClickListener);
 	    editTextObject = (EditText)findViewById(R.id.display_name_edittext);
 
-	    
-	    // TODO Auto-generated method stub
-	
+	    	
 	}
 	
 	private void saveButtonClick(){

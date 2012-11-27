@@ -25,4 +25,10 @@ public class MainActivity extends Activity {
     	startActivityForResult(startNewActivityOpen, 0);
     	return true;
     }
+    
+    public boolean onClickMenuButton(View view){
+    	Intent startNewActivityOpen = new Intent(this, SetInfo.class);
+    	startActivityForResult(startNewActivityOpen, 0);
+    	return true;
+    }
 }
