@@ -11,7 +11,7 @@
     </integer-array>
         <string name="username">Display Name</string>
         <string name="save">Save</string>
-        <string name="menu">Menu</string>
+        <string name="menu">Settings</string>
         <string name="toggle_nfc">Toggle NFC</string>
 
 </resources>
