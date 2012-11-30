@@ -19,7 +19,7 @@ public class MainActivity extends Activity {
 
         
         //GET SPLASH DISPLAYED ON TIMER
-        Thread splashTread = new Thread() {
+        Thread splashThread = new Thread() {
             @Override
             public void run() {
                 try {
@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
                 }
             }
         };
-        splashTread.start();
+        splashThread.start();
     }
 
     @Override
