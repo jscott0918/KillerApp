@@ -3,6 +3,7 @@ package com.killerapprejji;
 import android.app.Activity;
 import android.os.Bundle;
 import android.widget.ProgressBar;
+import android.nfc.*;
 
 public class AttackActivity extends Activity{
 	ProgressBar progressBar = (ProgressBar)findViewById(R.id.attack_progress_bar);
@@ -14,7 +15,14 @@ public class AttackActivity extends Activity{
         
 	}
 	private void initiateNFCAttack(){
-		
+		NfcAdapter nfc = NfcAdapter.getDefaultAdapter(getParent());
+		String attackMessage = new String("Attack," + InteractionHistory.getInstance().getDisplayName());
+		try {
+			nfc.setNdefPushMessage(new NdefMessage(attackMessage.getBytes()), this.getParent());
+		} catch (FormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 

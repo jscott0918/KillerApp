@@ -27,6 +27,10 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 		return true;
 	}
 	
+	public String getDisplayName(){
+		return displayName;
+	}
+	
 	public static InteractionHistory getInstance(){
 		if(interactionHistory == null){
 			interactionHistory = new InteractionHistory();
