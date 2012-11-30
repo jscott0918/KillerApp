@@ -18,6 +18,9 @@ public class AttackActivity extends Activity{
         progressBar.setProgress(progressBar.getMax());
         progressBar.setOnClickListener(finishActivity());
         //initiateNFCAttack();
+        // Create a timer object, along with a method to increment the progress bar
+        // have the timer schedule the progress bar to update at a fixed interval.
+        // if a communications interrupt is received, cancel the timer and handle the communication
         this.setResult(0);
         this.finish();
 	}
