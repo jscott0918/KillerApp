@@ -12,7 +12,7 @@ public class AttackActivity extends Activity{
 		super.onCreate(savedInstanceState);    
         setContentView(R.layout.activity_attack);
         progressBar.setProgress(progressBar.getMax());
-        
+        initiateNFCAttack();
 	}
 	private void initiateNFCAttack(){
 		NfcAdapter nfc = NfcAdapter.getDefaultAdapter(getParent());
