@@ -2,6 +2,9 @@
 <uml:Model xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:sysML="http://www.topcased.org/2.0/sysML" xmlns:uml="http://www.eclipse.org/uml2/3.0.0/UML" xmi:id="idModel" name="UseCase_1">
   <packagedElement xmi:type="uml:Package" xmi:id="idPackage" name="UseCase_1">
     <packagedElement xmi:type="sysML:View" xmi:id="_NB-NAPOiEeGbnfJ89GcO6g" name="View1">
+      <ownedComment xmi:type="uml:Comment" xmi:id="_70SvMC1sEeKMnPsmkk86Kg">
+        <body>Success</body>
+      </ownedComment>
       <packagedElement xmi:type="uml:Actor" xmi:id="_PXSekPOiEeGbnfJ89GcO6g" name="Player"/>
       <packagedElement xmi:type="uml:Actor" xmi:id="_4aPekPOiEeGbnfJ89GcO6g" name="Attacker">
         <generalization xmi:type="uml:Generalization" xmi:id="_m9AWMPOjEeGbnfJ89GcO6g" general="_PXSekPOiEeGbnfJ89GcO6g"/>
@@ -21,7 +24,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qywfxvOjEeGbnfJ89GcO6g" value="1"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_sSRxwPOjEeGbnfJ89GcO6g" name="Enter attack mode"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_sSRxwPOjEeGbnfJ89GcO6g" name="Press button to begin attack mode"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_xkhHcPOjEeGbnfJ89GcO6g" name="" memberEnd="_xkhHcfOjEeGbnfJ89GcO6g _xkhHdPOjEeGbnfJ89GcO6g">
         <ownedEnd xmi:type="uml:Property" xmi:id="_xkhHcfOjEeGbnfJ89GcO6g" name="attacker" type="_4aPekPOiEeGbnfJ89GcO6g" association="_xkhHcPOjEeGbnfJ89GcO6g">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xkhHcvOjEeGbnfJ89GcO6g" value="1"/>
@@ -32,7 +35,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_xkhHdvOjEeGbnfJ89GcO6g" value="1"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_zMkqYPOjEeGbnfJ89GcO6g" name="Receive notification on being attacked" clientDependency="_-IGGkAaYEeKDzqAuHGoRIA _Fzk5RAszEeKT3eejSMU6Og"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_zMkqYPOjEeGbnfJ89GcO6g" name="Notified of attack attempt" clientDependency="_-IGGkAaYEeKDzqAuHGoRIA _Fzk5RAszEeKT3eejSMU6Og"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_3DIsQPOjEeGbnfJ89GcO6g" name="Victim is notified they have been killed" memberEnd="_3DJTUPOjEeGbnfJ89GcO6g _3DJTU_OjEeGbnfJ89GcO6g">
         <ownedEnd xmi:type="uml:Property" xmi:id="_3DJTUPOjEeGbnfJ89GcO6g" name="defender" type="_9hRp0POiEeGbnfJ89GcO6g" association="_3DIsQPOjEeGbnfJ89GcO6g">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3DJTUfOjEeGbnfJ89GcO6g" value="1"/>
@@ -43,7 +46,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3DJTVfOjEeGbnfJ89GcO6g" value="1"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_QAp5wPOkEeGbnfJ89GcO6g" name="Personal Stats" clientDependency="_kkprtAsxEeKT3eejSMU6Og"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_QAp5wPOkEeGbnfJ89GcO6g" name="Personal (Lifetime) Stats" clientDependency="_kkprtAsxEeKT3eejSMU6Og"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_SIfwAPOkEeGbnfJ89GcO6g" name="A_&lt;player>_&lt;check kills/deaths>" memberEnd="_SIfwAfOkEeGbnfJ89GcO6g _SIfwBPOkEeGbnfJ89GcO6g">
         <ownedEnd xmi:type="uml:Property" xmi:id="_SIfwAfOkEeGbnfJ89GcO6g" name="player" type="_PXSekPOiEeGbnfJ89GcO6g" association="_SIfwAPOkEeGbnfJ89GcO6g">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_SIfwAvOkEeGbnfJ89GcO6g" value="1"/>
@@ -65,7 +68,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ew6CBvOkEeGbnfJ89GcO6g" value="1"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_yj4AwPOlEeGbnfJ89GcO6g" name="Leave Game"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_yj4AwPOlEeGbnfJ89GcO6g" name="Leave Game" clientDependency="_dyYiJC1pEeKMnPsmkk86Kg"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_3RDhkPOlEeGbnfJ89GcO6g" name="" memberEnd="_3RDhkfOlEeGbnfJ89GcO6g _3RDhlPOlEeGbnfJ89GcO6g">
         <ownedEnd xmi:type="uml:Property" xmi:id="_3RDhkfOlEeGbnfJ89GcO6g" name="leave Game" type="_yj4AwPOlEeGbnfJ89GcO6g" association="_3RDhkPOlEeGbnfJ89GcO6g">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3RDhkvOlEeGbnfJ89GcO6g" value="1"/>
@@ -157,7 +160,9 @@
       </packagedElement>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_Zp4uYPhFEeGbtJOpBIKWtQ" name="Dependency1" supplier="_PXSekPOiEeGbnfJ89GcO6g" client="_ApibQPOjEeGbnfJ89GcO6g"/>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_pDlcQPhFEeGbtJOpBIKWtQ" name="UseCase1"/>
-      <packagedElement xmi:type="uml:Actor" xmi:id="_U7ur4AaYEeKDzqAuHGoRIA" name="Defender"/>
+      <packagedElement xmi:type="uml:Actor" xmi:id="_U7ur4AaYEeKDzqAuHGoRIA" name="Defender">
+        <generalization xmi:type="uml:Generalization" xmi:id="_GykQEy1sEeKMnPsmkk86Kg" general="_PXSekPOiEeGbnfJ89GcO6g"/>
+      </packagedElement>
       <packagedElement xmi:type="uml:Association" xmi:id="_uXt-EAaYEeKDzqAuHGoRIA" name="Pass history to attacking device" memberEnd="_uXt-EQaYEeKDzqAuHGoRIA _uXt-FAaYEeKDzqAuHGoRIA">
         <ownedEnd xmi:type="uml:Property" xmi:id="_uXt-EQaYEeKDzqAuHGoRIA" name="enemy Device" type="_U7ur4AaYEeKDzqAuHGoRIA" association="_uXt-EAaYEeKDzqAuHGoRIA">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_uXt-EgaYEeKDzqAuHGoRIA" value="1"/>
@@ -168,7 +173,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_uXt-FgaYEeKDzqAuHGoRIA" value="1"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_5vd5cAaYEeKDzqAuHGoRIA" name="Tags enemy device" clientDependency="_9htcAAaYEeKDzqAuHGoRIA"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_5vd5cAaYEeKDzqAuHGoRIA" name="Tag enemy device" clientDependency="_9htcAAaYEeKDzqAuHGoRIA"/>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_9htcAAaYEeKDzqAuHGoRIA" name="Dependency2" supplier="_sSRxwPOjEeGbnfJ89GcO6g" client="_5vd5cAaYEeKDzqAuHGoRIA"/>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_-IGGkAaYEeKDzqAuHGoRIA" name="Dependency3" supplier="_5vd5cAaYEeKDzqAuHGoRIA" client="_zMkqYPOjEeGbnfJ89GcO6g"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_DvJOoAaZEeKDzqAuHGoRIA" name="" memberEnd="_DvJOoQaZEeKDzqAuHGoRIA _DvJOpAaZEeKDzqAuHGoRIA">
@@ -191,7 +196,7 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_GFwgtgaZEeKDzqAuHGoRIA" value="1"/>
         </ownedEnd>
       </packagedElement>
-      <packagedElement xmi:type="uml:Dependency" xmi:id="_KiP6IAaZEeKDzqAuHGoRIA" name="Dependency4" supplier="_zMkqYPOjEeGbnfJ89GcO6g" client="_wy5V4POmEeGbnfJ89GcO6g"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_KiP6IAaZEeKDzqAuHGoRIA" name="Success" supplier="_zMkqYPOjEeGbnfJ89GcO6g" client="_wy5V4POmEeGbnfJ89GcO6g"/>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_n8KacAaZEeKDzqAuHGoRIA" name="Enter Options Menu">
         <generalization xmi:type="uml:Generalization" xmi:id="_rb4CkAaZEeKDzqAuHGoRIA" general="_QAp5wPOkEeGbnfJ89GcO6g"/>
         <generalization xmi:type="uml:Generalization" xmi:id="_rz_noAaZEeKDzqAuHGoRIA" general="_1BigkPOmEeGbnfJ89GcO6g"/>
@@ -286,7 +291,7 @@
       </packagedElement>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_wCZ94AswEeKT3eejSMU6Og" name="Toggle Audio Notification" clientDependency="_7UKmBAswEeKT3eejSMU6Og"/>
       <packagedElement xmi:type="uml:UseCase" xmi:id="_wqn0cAswEeKT3eejSMU6Og" name="Set Notification Options"/>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_2umwIAswEeKT3eejSMU6Og" name="Toggle Popup Notification" clientDependency="_74pzIAswEeKT3eejSMU6Og"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_2umwIAswEeKT3eejSMU6Og" name="Toggle Popup (Screen) Notification" clientDependency="_74pzIAswEeKT3eejSMU6Og"/>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_7UKmBAswEeKT3eejSMU6Og" name="Dependency8" supplier="_n8KacAaZEeKDzqAuHGoRIA" client="_wCZ94AswEeKT3eejSMU6Og"/>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_74pzIAswEeKT3eejSMU6Og" name="Dependency9" supplier="_n8KacAaZEeKDzqAuHGoRIA" client="_2umwIAswEeKT3eejSMU6Og"/>
       <packagedElement xmi:type="uml:Dependency" xmi:id="_9uIHBAswEeKT3eejSMU6Og" name="Dependency10" supplier="_n8KacAaZEeKDzqAuHGoRIA" client="_1BigkPOmEeGbnfJ89GcO6g"/>
@@ -380,7 +385,7 @@
         </ownedEnd>
       </packagedElement>
       <packagedElement xmi:type="uml:Actor" xmi:id="_CGs3gAs2EeKT3eejSMU6Og" name="Defender"/>
-      <packagedElement xmi:type="uml:UseCase" xmi:id="_DJS88As2EeKT3eejSMU6Og" name="Activate Defense Mode"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_DJS88As2EeKT3eejSMU6Og" name="Activate Defense Mode" clientDependency="_FtZptC1qEeKMnPsmkk86Kg"/>
       <packagedElement xmi:type="uml:Association" xmi:id="_MjAeVgs2EeKT3eejSMU6Og" name="" memberEnd="_MjAeVws2EeKT3eejSMU6Og _MjAeWgs2EeKT3eejSMU6Og">
         <ownedEnd xmi:type="uml:Property" xmi:id="_MjAeVws2EeKT3eejSMU6Og" name="defender" type="_U7ur4AaYEeKDzqAuHGoRIA" association="_MjAeVgs2EeKT3eejSMU6Og">
           <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MjAeWAs2EeKT3eejSMU6Og" value="1"/>
@@ -391,6 +396,58 @@
           <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MjAeXAs2EeKT3eejSMU6Og" value="1"/>
         </ownedEnd>
       </packagedElement>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_dyYiJC1pEeKMnPsmkk86Kg" name="Dependency15" supplier="_dhkcwAssEeKT3eejSMU6Og" client="_yj4AwPOlEeGbnfJ89GcO6g"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_FtZptC1qEeKMnPsmkk86Kg" name="Dependency16" supplier="_zMkqYPOjEeGbnfJ89GcO6g" client="_DJS88As2EeKT3eejSMU6Og"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_ISKQAC1rEeKMnPsmkk86Kg" name="Clear game history" clientDependency="_OeHb9C1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_LCSOQC1rEeKMnPsmkk86Kg" name="Clear lifetime history" clientDependency="_PRA4hC1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_OeHb9C1rEeKMnPsmkk86Kg" name="Dependency17" supplier="_ApNQsAs0EeKT3eejSMU6Og" client="_ISKQAC1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_PRA4hC1rEeKMnPsmkk86Kg" name="Dependency18" supplier="_ApNQsAs0EeKT3eejSMU6Og" client="_LCSOQC1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_Y47N8C1rEeKMnPsmkk86Kg" name="Set Player avatar" clientDependency="_co8i8C1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_co8i8C1rEeKMnPsmkk86Kg" name="Dependency19" supplier="_n8KacAaZEeKDzqAuHGoRIA" client="_Y47N8C1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_h_r-IC1rEeKMnPsmkk86Kg" name="Refresh Game List" clientDependency="_kJC3VC1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_kJC3VC1rEeKMnPsmkk86Kg" name="Dependency20" supplier="_b-5JEAssEeKT3eejSMU6Og" client="_h_r-IC1rEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:Association" xmi:id="_wwm0xi1rEeKMnPsmkk86Kg" name="A_&lt;attacker>_&lt;tag enemy device>" memberEnd="_wwm0xy1rEeKMnPsmkk86Kg _wwm0yi1rEeKMnPsmkk86Kg">
+        <ownedEnd xmi:type="uml:Property" xmi:id="_wwm0xy1rEeKMnPsmkk86Kg" name="attacker" type="_4aPekPOiEeGbnfJ89GcO6g" association="_wwm0xi1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wwm0yC1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wwm0yS1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_wwm0yi1rEeKMnPsmkk86Kg" name="tag enemy device" type="_5vd5cAaYEeKDzqAuHGoRIA" association="_wwm0xi1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_wwm0yy1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_wwm0zC1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_zRWTNi1rEeKMnPsmkk86Kg" name="" memberEnd="_zRWTNy1rEeKMnPsmkk86Kg _zRWTOi1rEeKMnPsmkk86Kg">
+        <ownedEnd xmi:type="uml:Property" xmi:id="_zRWTNy1rEeKMnPsmkk86Kg" name="attacker" type="_4aPekPOiEeGbnfJ89GcO6g" association="_zRWTNi1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zRWTOC1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zRWTOS1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_zRWTOi1rEeKMnPsmkk86Kg" name="tag enemy device" type="_5vd5cAaYEeKDzqAuHGoRIA" association="_zRWTNi1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zRWTOy1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_zRWTPC1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_4jKLFi1rEeKMnPsmkk86Kg" name="" memberEnd="_4jKLFy1rEeKMnPsmkk86Kg _4jKLGi1rEeKMnPsmkk86Kg">
+        <ownedEnd xmi:type="uml:Property" xmi:id="_4jKLFy1rEeKMnPsmkk86Kg" name="press button to activate attack mode" type="_sSRxwPOjEeGbnfJ89GcO6g" association="_4jKLFi1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4jKLGC1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4jKLGS1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_4jKLGi1rEeKMnPsmkk86Kg" name="attacker" type="_4aPekPOiEeGbnfJ89GcO6g" association="_4jKLFi1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_4jKLGy1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_4jKLHC1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:Association" xmi:id="_8ptJsC1rEeKMnPsmkk86Kg" name="" memberEnd="_8ptJsS1rEeKMnPsmkk86Kg _8ptJtC1rEeKMnPsmkk86Kg">
+        <ownedEnd xmi:type="uml:Property" xmi:id="_8ptJsS1rEeKMnPsmkk86Kg" name="attacker" type="_4aPekPOiEeGbnfJ89GcO6g" association="_8ptJsC1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8ptJsi1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8ptJsy1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+        <ownedEnd xmi:type="uml:Property" xmi:id="_8ptJtC1rEeKMnPsmkk86Kg" name="tag enemy device" type="_5vd5cAaYEeKDzqAuHGoRIA" association="_8ptJsC1rEeKMnPsmkk86Kg">
+          <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8ptJtS1rEeKMnPsmkk86Kg" value="1"/>
+          <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_8ptJti1rEeKMnPsmkk86Kg" value="1"/>
+        </ownedEnd>
+      </packagedElement>
+      <packagedElement xmi:type="uml:UseCase" xmi:id="_UxYUUC1sEeKMnPsmkk86Kg" name="Delete (End) Game" clientDependency="_YQkYBC1sEeKMnPsmkk86Kg"/>
+      <packagedElement xmi:type="uml:Dependency" xmi:id="_YQkYBC1sEeKMnPsmkk86Kg" name="Dependency21" supplier="_ehu5QAssEeKT3eejSMU6Og" client="_UxYUUC1sEeKMnPsmkk86Kg"/>
     </packagedElement>
   </packagedElement>
   <profileApplication xmi:type="uml:ProfileApplication" xmi:id="idProfileApplication">
