@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
-import android.view.MotionEvent;
 import android.view.View;
 
 public class MainActivity extends Activity {
@@ -12,7 +11,9 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash);
+        //doSplashScreen();
+        setContentView(R.layout.activity_main);
+        /*   setContentView(R.layout.splash);
         
         final boolean _active = true;
         final int _splashTime = 5000; // time to display the splash screen in ms
@@ -39,13 +40,21 @@ public class MainActivity extends Activity {
                 }
             }
         };
-        splashThread.start();
+        splashThread.start();*/
     }
+    
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
+    }
+    
+    public boolean onClickMenuButton(View view){
+    	Intent startNewActivityOpen = new Intent(this, SetInfo.class);
+    	startActivityForResult(startNewActivityOpen, 0);
+    	return true;
     }
     
     public boolean onClickAttackButton(View view){
