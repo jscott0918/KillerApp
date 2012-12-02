@@ -26,6 +26,7 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 	/*public NfcAdapter getNFC(){
 		return nfc;
 	}*/
+	//test for simple commit
 	
 	private InteractionHistory(){
 		eventList = new ArrayList<Event>();
