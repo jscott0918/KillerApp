@@ -26,4 +26,16 @@
         android:onClick="onClickMenuButton"
         android:text="@string/menu" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/attack_button"
+        android:layout_alignLeft="@+id/attack_button"
+        android:layout_alignRight="@+id/attack_button"
+        android:minHeight="96dp"
+        android:minWidth="256dp"
+        android:text="@string/defend_button"
+        android:textSize="46sp" />
+
 </RelativeLayout>
