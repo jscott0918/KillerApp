@@ -26,6 +26,9 @@ public class SetInfo extends Activity {
 	    button = (Button)findViewById(R.id.save_player_info_button);
 	    button.setOnClickListener(onClickListener);
 	    editTextObject = (EditText)findViewById(R.id.display_name_edittext);
+	    if(InteractionHistory.getInstance().getDisplayName() != null){
+	    	editTextObject.setHint(InteractionHistory.getInstance().getDisplayName());
+	    }
 
 	    	
 	}
