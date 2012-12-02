@@ -34,4 +34,10 @@ public class MainActivity extends Activity {
     	startActivityForResult(startNewActivityOpen, 0);
     	return true;
     }
+    
+    public boolean onClickDefendButton(View view){
+    	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
+    	startActivityForResult(startNewActivityOpen, 0);
+    	return true;
+    }
 }
