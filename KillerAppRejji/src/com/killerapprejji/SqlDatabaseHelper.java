@@ -1,5 +1,7 @@
 package com.killerapprejji;
 
+import java.util.ArrayList;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -53,8 +55,24 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 					+ attack.getAttackerId() + ", "
 					+ attack.getDefender() + ", "
 					+ attack.getDefenderId() + ", "
+					+ attack.getTime() + ", "
 				+ " ) "
 				);
+	}
+	
+	public ArrayList<Event> getEvents(){
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.execSQL("SELECT * FROM " + DICTIONARY_TABLE_NAME
+				+ " ");
+		String[] columnNames = new String[5];
+		
+		columnNames[0] = "attacker";
+		columnNames[1] = "attackerid";
+		columnNames[2] = "defender";
+		columnNames[3] = "defenderid";
+		columnNames[4] = "timestamp";
+		db.query(DICTIONARY_TABLE_NAME, columnNames,new String("*"), columnNames, new String(), new String(), new String(), null);
+		return new ArrayList<Event>();
 	}
 	
 	public void setName(String name)
