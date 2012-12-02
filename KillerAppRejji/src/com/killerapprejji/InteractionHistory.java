@@ -29,7 +29,6 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 	
 	private InteractionHistory(){
 		eventList = new ArrayList<Event>();
-		displayName = new String();
 	}
 	
 	public boolean addEvent(Event event){
@@ -38,7 +37,7 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 	}
 	
 	public boolean setDisplayName(String name){
-		displayName = name;
+		displayName = new String(name);
 		return true;
 	}
 	
