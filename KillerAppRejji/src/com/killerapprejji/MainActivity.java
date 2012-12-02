@@ -15,7 +15,10 @@ public class MainActivity extends Activity {
         
     }
     
-
+    public void onClickViewHistory(View view){
+    	Intent startNewActivityOpen = new Intent(this, DisplayInteractions.class);
+    	startActivityForResult(startNewActivityOpen, 0);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

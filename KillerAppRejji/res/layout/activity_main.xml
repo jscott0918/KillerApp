@@ -39,4 +39,15 @@
         android:text="@string/defend_button"
         android:textSize="46sp" />
 
+    <Button
+        android:id="@+id/view_interaction_table_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/defend_button"
+        android:layout_alignRight="@+id/defend_button"
+        android:layout_below="@+id/menu_button"
+        android:layout_marginTop="22dp"
+        android:onClick="onClickViewHistory"
+        android:text="@string/view_interaction_history" />
+
 </RelativeLayout>

@@ -1,23 +1,30 @@
 package com.killerapprejji;
 //testings
+import java.nio.charset.Charset;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.nfc.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AttackActivity extends Activity{
 	ProgressBar progressBar;// = (ProgressBar)findViewById(R.id.attack_progress_bar);
 	NfcAdapter nfc;
 	@Override
+	//public void onCreate(Bundle savedInstanceState) {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);    
         setContentView(R.layout.activity_attack);
         progressBar = (ProgressBar) findViewById(R.id.attack_progress_bar);
         // Create a timer object, along with a method to increment the progress bar.
+        doNFCTask();
 		final Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask(){
 			public void run(){
@@ -39,6 +46,11 @@ public class AttackActivity extends Activity{
 		finish();
 	}
 
+	private void doNFCTask(){
+		
+		NdefRecord mimeRecord = NdefRecord.createMime("application/com.killerapprejji.attack",
+			    new String("attacker:" + ",attackerid:" + "").getBytes(Charset.forName("US-ASCII")));
+	}
 	private void initiateNFCAttack(){
 		// create NFC adapter
 		nfc = NfcAdapter.getDefaultAdapter(getParent());

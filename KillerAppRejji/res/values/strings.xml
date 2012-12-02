@@ -18,5 +18,6 @@
     <string name="toggle_nfc">Toggle NFC</string>
     <string name="title_activity_display_interactions">DisplayInteractions</string>
     <string name="defend_button">Defend!</string>
+    <string name="view_interaction_history">View History</string>
 
 </resources>
