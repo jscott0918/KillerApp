@@ -17,7 +17,7 @@ public class DisplayInteractions extends Activity {
 		
 		setContentView(R.layout.table_layout);
 		// Show the Up button in the action bar.
-		getActionBar().setDisplayHomeAsUpEnabled(true);
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
