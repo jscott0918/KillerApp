@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.content.ContextWrapper;
 import android.nfc.NfcAdapter;
+import android.widget.Toast;
 
 public class InteractionHistory implements Serializable, UpdateInteraction{
 	/**
@@ -15,15 +16,16 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 	public static InteractionHistory interactionHistory = null;
 	private static ArrayList<Event> eventList;
 	private static String displayName = null;
-	NfcAdapter nfc;
+	//private NfcAdapter nfc;
 	
-	public void setNFC(Activity a){
+	/*public void setNFC(Activity a){
 		nfc = NfcAdapter.getDefaultAdapter(a);
-	}
+		
+	}*/
 	
-	public NfcAdapter getNFC(){
+	/*public NfcAdapter getNFC(){
 		return nfc;
-	}
+	}*/
 	
 	private InteractionHistory(){
 		eventList = new ArrayList<Event>();

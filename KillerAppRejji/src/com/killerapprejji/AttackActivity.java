@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import android.nfc.*;
 
 public class AttackActivity extends Activity{
 	ProgressBar progressBar;// = (ProgressBar)findViewById(R.id.attack_progress_bar);
+	NfcAdapter nfc;
 	@Override
 	//public void onCreate(Bundle savedInstanceState) {
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,8 +40,17 @@ public class AttackActivity extends Activity{
 			
 		};
 	}
+	
 	private void initiateNFCAttack(){
-		NfcAdapter nfc = NfcAdapter.getDefaultAdapter(getParent());
+		// create NFC adapter
+		nfc = NfcAdapter.getDefaultAdapter(getParent());
+		if (nfc == null) {
+			//not sure what "Toast" is, but the example uses it
+			Toast.makeText(this, "NFC not available.", Toast.LENGTH_LONG).show();
+			//finish();
+			return;
+		}
+		// create and send message
 		String attackMessage = new String("Attack," + InteractionHistory.getInstance().getDisplayName());
 		try {
 			nfc.setNdefPushMessage(new NdefMessage(attackMessage.getBytes()), this.getParent());
