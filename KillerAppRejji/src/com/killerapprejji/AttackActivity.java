@@ -35,7 +35,6 @@ public class AttackActivity extends Activity{
 			@Override
 			public void onClick(View v) {
 				callFinish();
-				
 			}
 			
 		};

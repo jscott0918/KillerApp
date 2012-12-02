@@ -8,16 +8,23 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 
 	private static final int DATABASE_VERSION = 1;
     private static final String DICTIONARY_TABLE_NAME = "dictionary";
+    private static final String USERNAME_TABLE_NAME = "usernames";
     private static final String DATABASE_NAME = "KillerAppDB";
     private static final String DICTIONARY_TABLE_CREATE =
                 "CREATE TABLE IF NOT EXISTS" + DICTIONARY_TABLE_NAME 
                 + " (" +
                 "attacker" + " TEXT, " +
-                "attackerid" + " VARCHAR(64)" +
-                "defender" + " TEXT," +
-                "defenderid" + " VARCHAR(64)" +
-                "timestamp" + " DATETIME," +                
+                "attackerid" + " VARCHAR(64), " +
+                "defender" + " TEXT, " +
+                "defenderid" + " VARCHAR(64), " +
+                "timestamp" + " DATETIME " +                
                 ");";
+    private static final String USERNAME_TABLE_CREATE = 
+    			"CREATE TABLE IF NOT EXISTS" + USERNAME_TABLE_NAME 
+    			+ " (" +
+    			"timestamp" + " DATETIME, " + 
+    			"username" + " TEXT " +
+    			");";
     
     public SqlDatabaseHelper(Context context){
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -26,7 +33,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DICTIONARY_TABLE_CREATE);
-		
+		db.execSQL(USERNAME_TABLE_CREATE);
 	}
 
 	@Override
@@ -48,6 +55,11 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 					+ attack.getDefenderId() + ", "
 				+ " ) "
 				);
+	}
+	
+	public void setName(String name)
+	{
+		/* STUBBED */
 	}
 
 }

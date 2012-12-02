@@ -29,8 +29,6 @@ public class SetInfo extends Activity {
 	    if(InteractionHistory.getInstance().getDisplayName() != null){
 	    	editTextObject.setHint(InteractionHistory.getInstance().getDisplayName());
 	    }
-
-	    	
 	}
 	
 	private void saveButtonClick(){
