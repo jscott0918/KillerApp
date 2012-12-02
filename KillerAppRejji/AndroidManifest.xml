@@ -19,8 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>  
             </intent-filter>
         </activity>
-        <activity android:name=".AttackActivity" android:theme="@style/AppTheme"></activity>
-        <activity android:launchMode="standard" android:screenOrientation="portrait" android:label="@string/title_activity_main" android:alwaysRetainTaskState="true" android:noHistory="false" android:description="@string/menu_settings" android:configChanges="keyboard" android:theme="@style/AppTheme" android:parentActivityName="@string/title_activity_main" android:icon="@drawable/ninjahead" android:name=".SetInfo"></activity>
+        <activity android:name=".AttackActivity" android:theme="@style/AppTheme" android:label="@string/attack_button"></activity>
+        <activity android:launchMode="standard" android:screenOrientation="portrait" android:label="@string/menu_settings" android:alwaysRetainTaskState="true" android:noHistory="false" android:description="@string/menu_settings" android:configChanges="keyboard" android:theme="@style/AppTheme" android:parentActivityName="@string/title_activity_main" android:icon="@drawable/ninjahead" android:name=".SetInfo"></activity>
+        <activity android:name=".DefendActivity" android:label="@string/defend_button" android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
