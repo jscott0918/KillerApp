@@ -1,5 +1,8 @@
 package com.killerapprejji;
 //testings
+import java.util.Timer;
+import java.util.TimerTask;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,6 +10,8 @@ import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.nfc.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class AttackActivity extends Activity{
 	ProgressBar progressBar;// = (ProgressBar)findViewById(R.id.attack_progress_bar);
@@ -17,30 +22,28 @@ public class AttackActivity extends Activity{
 		super.onCreate(savedInstanceState);    
         setContentView(R.layout.activity_attack);
         progressBar = (ProgressBar) findViewById(R.id.attack_progress_bar);
-        progressBar.setProgress(progressBar.getMax());
-        progressBar.setOnClickListener(finishActivity());
-        //initiateNFCAttack();
-        // Create a timer object, along with a method to increment the progress bar
-        // have the timer schedule the progress bar to update at a fixed interval.
-        // if a communications interrupt is received, cancel the timer and handle the communication
+        // Create a timer object, along with a method to increment the progress bar.
+		final Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask(){
+			public void run(){
+		        // have the timer schedule the progress bar to update at a fixed interval.
+				progressBar.incrementProgressBy(progressBar.getMax()/15);
+				// If time runs out, return to main menu
+				if (progressBar.getProgress() == progressBar.getMax())
+				{
+					callFinish();
+				}
+		        // if a communications interrupt is received, cancel the timer and handle the communication
+		        //initiateNFCAttack();
+			}
+		}, 0, 1000);
         this.setResult(0);
 	}
 	
 	private void callFinish(){
 		finish();
 	}
-	private OnClickListener finishActivity(){
-		return new OnClickListener(){
-
-			@Override
-			public void onClick(View v) {
-				callFinish();
-				
-			}
-			
-		};
-	}
-	
+		
 	private void initiateNFCAttack(){
 		// create NFC adapter
 		nfc = NfcAdapter.getDefaultAdapter(getParent());
