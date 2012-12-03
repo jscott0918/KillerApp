@@ -3,10 +3,11 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <permission android:name="NFC" android:permissionGroup="NFC"></permission>
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="15" />
-    <permission android:name="NFC" android:permissionGroup="NFC"></permission>
+        android:targetSdkVersion="16" />
+    
 
     <application
         android:icon="@drawable/ninjahead"
