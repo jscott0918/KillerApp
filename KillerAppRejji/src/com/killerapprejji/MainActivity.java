@@ -1,11 +1,15 @@
 package com.killerapprejji;
 
+import java.util.Calendar;
+import java.util.Date;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
@@ -59,9 +63,18 @@ public class MainActivity extends Activity {
     }
     
     public boolean onClickAttackButton(View view){
-    	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
-    	startActivityForResult(startNewActivityOpen, 0);
-    	return true;
+    	boolean ret = false;
+    	if(ActionAvailability.getInstance().getCanAttack() < Calendar.getInstance().getTimeInMillis()){
+    		Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
+    		startActivityForResult(startNewActivityOpen, 0);
+    		ActionAvailability.getInstance().increaseCanAttack(600000);
+    		ret = true;
+    	}
+    	else {
+    		Toast.makeText(getApplicationContext(), "Cannot attack until: " + new Date(ActionAvailability.getInstance().getCanAttack()), 10000).show();
+    		ret = false;
+    	}
+    	return ret;
     }
     
     public boolean onClickDefendButton(View view){
