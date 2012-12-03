@@ -3,6 +3,7 @@ package com.killerapprejji;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -19,7 +20,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
                 "attackerid" + " VARCHAR(64), " +
                 "defender" + " TEXT, " +
                 "defenderid" + " VARCHAR(64), " +
-                "timestamp" + " DATETIME " +                
+                "timestamp" + " TEXT " +
                 ");";
     private static final String USERNAME_TABLE_CREATE = 
     			"CREATE TABLE IF NOT EXISTS" + USERNAME_TABLE_NAME 
@@ -49,21 +50,21 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		SQLiteDatabase db = this.getWritableDatabase();
 		db.execSQL(
 				"INSERT INTO " + DICTIONARY_TABLE_NAME 
-				+ " (attacker, attackerid, defender, defenderid) "
+				+ " (attacker, attackerid, defender, defenderid, timestamp) "
 				+ " VALUES ( " 
 					+ attack.getAttacker() + ", "
 					+ attack.getAttackerId() + ", "
 					+ attack.getDefender() + ", "
 					+ attack.getDefenderId() + ", "
-					+ attack.getTime() + ", "
+					+ attack.getDateTime() + ", "
 				+ " ) "
 				);
 	}
 	
 	public ArrayList<Event> getEvents(){
 		SQLiteDatabase db = this.getWritableDatabase();
-		db.execSQL("SELECT * FROM " + DICTIONARY_TABLE_NAME
-				+ " ");
+		Cursor resultscursor;
+		ArrayList<Event> results = new ArrayList<Event>();
 		String[] columnNames = new String[5];
 		
 		columnNames[0] = "attacker";
@@ -71,8 +72,19 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		columnNames[2] = "defender";
 		columnNames[3] = "defenderid";
 		columnNames[4] = "timestamp";
-		db.query(DICTIONARY_TABLE_NAME, columnNames,new String("*"), columnNames, new String(), new String(), new String(), null);
-		return new ArrayList<Event>();
+		
+		resultscursor = db.query(DICTIONARY_TABLE_NAME, columnNames, null, null, null, null, null);
+		while (!resultscursor.isAfterLast()) {
+			Event e = new Event(resultscursor.getString(4),    // timestamp
+					            resultscursor.getString(0),    // attacker
+					            resultscursor.getString(1),    // attackerid
+					            resultscursor.getString(2),    // defender
+					            resultscursor.getString(3)    // defenderid
+					            );
+			results.add(e);
+			resultscursor.moveToNext();
+		}
+		return results;
 	}
 	
 	public void setName(String name)
