@@ -6,12 +6,16 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
-    <permission android:name="android.permission.NFC" android:permissionGroup="NFC"></permission>
+    <uses-feature android:name="android.hardware.NFC" 
+        		  android:required="true"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.NFC"/>
 
     <application
         android:icon="@drawable/ninjahead"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" android:allowClearUserData="true" android:logo="@drawable/ninjahead" android:persistent="true" android:permission="android.permission.NFC">
+        android:theme="@style/AppTheme" android:allowClearUserData="true" android:logo="@drawable/ninjahead" android:persistent="true" >
         <activity android:name=".MainActivity" android:label="@string/title_activity_main">
             <intent-filter>
 		      <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
