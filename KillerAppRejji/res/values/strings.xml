@@ -20,5 +20,6 @@
     <string name="defend_button">Defend!</string>
     <string name="view_interaction_history">View Stats</string>
     <string name="Stats">Stats</string>
+    <string name="title_activity_nfc_handle">NfcHandle</string>
 
 </resources>
