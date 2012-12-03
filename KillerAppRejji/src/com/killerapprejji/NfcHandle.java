@@ -25,82 +25,81 @@ public class NfcHandle extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Log.d("NfcHandle.onCreate", "starting onCreate");
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		mNfcPendingIntent = PendingIntent.getActivity(this, 0,
 			    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-			// Intent filters for exchanging over p2p.
-			IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
-			IntentFilter defendDetected = new IntentFilter("defend");
-			try {
-			    ndefDetected.addDataType("application/com.killerapprejji.NfcHandle");
-			} catch (MalformedMimeTypeException e) {
-			}
-			Log.d(this.toString(), "mNfcPendingIntent: " + mNfcPendingIntent.toString());
-			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
-			finish();
+		// Intent filters for exchanging over p2p.
+		IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+		IntentFilter defendDetected = new IntentFilter("defend");
+		Intent getIntent = getIntent();
+		String intMessage = getIntent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		Log.d("OnCreate()", "intMessage: " + intMessage);
+		if(intMessage.equals("defend")){
+			setDefendMessage();
+		} else if (intMessage.equals("attack")){
+			setAttackMessage();
+		}
+		try {
+		    ndefDetected.addDataType("application/com.killerapprejji.NfcHandle");
+		} catch (MalformedMimeTypeException e) {
+			Log.e("MalformedMimTypeException", e.getStackTrace().toString());
+		}
+		Log.d(this.toString(), "mNfcPendingIntent: ");
+		mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
+		finish();
 		//setContentView(R.layout.activity_nfc_handle);
 	}
 	
 	protected void onResume(){
+		Log.d("NfcHandle.onResume", "starting onResume");
 		NdefMessage msg = (NdefMessage) getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
 		byte[] payload = msg.getRecords()[0].getPayload();
-		Toast.makeText(getBaseContext(), payload.toString(), 40000);
 	}
 	
 	public void setAttackMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
 		NdefMessage attackNdefMessage = null;
-		try {
-			attackNdefMessage = new NdefMessage(new String("attack,attacker:"
-											+ intHist.getDisplayName() 
-											+ ",attackerid:" + intHist.getId()).getBytes());
-		} catch (FormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		NdefRecord[] ndefRecords = new NdefRecord[10];
+		ndefRecords[0] = NdefRecord.createMime("application/com.killerapprejji.NfcHandle", new String("attack,attacker:"
+				+ intHist.getDisplayName() 
+				+ ",attackerid:" + "1").getBytes());
+		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
 	
 	public void setDefendMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
+		Log.d("setDefendMessage()", "In setDefendMessage");
 		NdefMessage attackNdefMessage = null;
-		try {
-			attackNdefMessage = new NdefMessage(new String("defend,defender:"
-											+ intHist.getDisplayName() 
-											+ ",defenderid:" + intHist.getId()).getBytes());
-		} catch (FormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		NdefRecord[] ndefRecords = new NdefRecord[10];
+		ndefRecords[0] = NdefRecord.createMime("application/com.killerapprejji.NfcHandle", new String("defend,defender:"
+				+ intHist.getDisplayName() 
+				+ ",defenderid:" + "1").getBytes());
+		attackNdefMessage = new NdefMessage(ndefRecords[0]);
+		
 		// need to come up with a way to end if the above try/catch fails
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
 	public void setIdleMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
-		TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
 		NdefMessage attackNdefMessage = null;
-		try {
-			attackNdefMessage = new NdefMessage(new String("idle,defender:"
-											+ intHist.getDisplayName() 
-											+ ",defenderid:" + tm.getDeviceId()).getBytes());
-		} catch (FormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		NdefRecord[] ndefRecords = new NdefRecord[10];
+		ndefRecords[0] = NdefRecord.createMime("application/com.killerapprejji.NfcHandle", new String("attack,attacker:"
+				+ intHist.getDisplayName() 
+				+ ",attackerid:" + "1").getBytes());
+		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		// need to come up with a way to end if the above try/catch fails
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
 	public void setDeadMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
 		NdefMessage attackNdefMessage = null;
-		try {
-			attackNdefMessage = new NdefMessage(new String("dead,defender:"
-											+ intHist.getDisplayName() 
-											+ ",defenderid:" + intHist.getId()).getBytes());
-		} catch (FormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		NdefRecord[] ndefRecords = new NdefRecord[10];
+		ndefRecords[0] = NdefRecord.createMime("application/com.killerapprejji.NfcHandle", new String("attack,attacker:"
+				+ intHist.getDisplayName() 
+				+ ",attackerid:" + "1").getBytes());
+		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		// need to come up with a way to end if the above try/catch fails
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
@@ -118,6 +117,7 @@ public class NfcHandle extends Activity {
 	        Toast.makeText(this, "You got 'em!", Toast.LENGTH_LONG).show();
 	    }
 	    else if("defend" == intent.getAction()){
+	    	Log.d("found defend intent", "toast message may pop up");
 	    	Toast.makeText(this, "Defend action intent filtered by onNewIntent in NfcHandle", Toast.LENGTH_LONG).show();
 	    }
 	    

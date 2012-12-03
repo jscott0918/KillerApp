@@ -19,6 +19,7 @@ public class MainActivity extends Activity {
 	
 	Button attackButton = null;
 	Button defendButton = null;
+	public static final String EXTRA_MESSAGE = "com.killerappRejji.MainActivity.MESSAGE";
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,9 +69,15 @@ public class MainActivity extends Activity {
     public boolean onClickAttackButton(View view){
     	boolean ret = false;
     	if(ActionAvailability.getInstance().getCanAttack() < Calendar.getInstance().getTimeInMillis()){
-    		Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
+    		Log.d("MainActivity", "starting onClickAttackButton");
+        	Intent setAttackMessage = new Intent("attack", null, this, NfcHandle.class);
+        	setAttackMessage.putExtra(EXTRA_MESSAGE, "attack");
+        	startActivity(setAttackMessage);
+        	/*
+        	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
     		startActivityForResult(startNewActivityOpen, 0);
-    		ActionAvailability.getInstance().increaseCanAttack(600000);
+    		*/
+    		ActionAvailability.getInstance().increaseCanAttack(60000);
     		ret = true;
     	}
     	else {
@@ -83,6 +90,7 @@ public class MainActivity extends Activity {
     public boolean onClickDefendButton(View view){
     	Log.d("MainActivity", "starting onClickDefendButton");
     	Intent setDefendMessage = new Intent("defend", null, this, NfcHandle.class);
+    	setDefendMessage.putExtra(EXTRA_MESSAGE, "defend");
     	startActivity(setDefendMessage);
     	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
     	startActivityForResult(startNewActivityOpen, 0);
