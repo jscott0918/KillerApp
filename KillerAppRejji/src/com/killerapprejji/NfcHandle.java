@@ -42,11 +42,53 @@ public class NfcHandle extends Activity {
 	
 	public void setAttackMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
-		NdefMessage attackNdefMessage;
+		NdefMessage attackNdefMessage = null;
 		try {
 			attackNdefMessage = new NdefMessage(new String("attack,attacker:"
 											+ intHist.getDisplayName() 
 											+ ",attackerid:" + intHist.getId()).getBytes());
+		} catch (FormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// need to come up with a way to end if the above try/catch fails
+		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+	}
+	public void setDefendMessage(){
+		InteractionHistory intHist = InteractionHistory.getInstance();
+		NdefMessage attackNdefMessage = null;
+		try {
+			attackNdefMessage = new NdefMessage(new String("defend,defender:"
+											+ intHist.getDisplayName() 
+											+ ",defenderid:" + intHist.getId()).getBytes());
+		} catch (FormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// need to come up with a way to end if the above try/catch fails
+		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+	}
+	public void setIdleMessage(){
+		InteractionHistory intHist = InteractionHistory.getInstance();
+		NdefMessage attackNdefMessage = null;
+		try {
+			attackNdefMessage = new NdefMessage(new String("idle,defender:"
+											+ intHist.getDisplayName() 
+											+ ",defenderid:" + intHist.getId()).getBytes());
+		} catch (FormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		// need to come up with a way to end if the above try/catch fails
+		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+	}
+	public void setDeadMessage(){
+		InteractionHistory intHist = InteractionHistory.getInstance();
+		NdefMessage attackNdefMessage = null;
+		try {
+			attackNdefMessage = new NdefMessage(new String("dead,defender:"
+											+ intHist.getDisplayName() 
+											+ ",defenderid:" + intHist.getId()).getBytes());
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
