@@ -63,6 +63,8 @@ public class MainActivity extends Activity {
     
     public boolean onClickAttackButton(View view){
     	boolean ret = false;
+    	NfcHandle nfc = new NfcHandle();
+    	nfc.setAttackMessage();
     	if(ActionAvailability.getInstance().getCanAttack() < Calendar.getInstance().getTimeInMillis()){
     		Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
     		startActivityForResult(startNewActivityOpen, 0);

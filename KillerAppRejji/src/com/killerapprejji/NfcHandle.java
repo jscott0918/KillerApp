@@ -35,6 +35,25 @@ public class NfcHandle extends Activity {
 		//setContentView(R.layout.activity_nfc_handle);
 	}
 	
+	protected void onResume(){
+		NdefMessage msg = (NdefMessage) getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
+		byte[] payload = msg.getRecords()[0].getPayload();
+	}
+	
+	public void setAttackMessage(){
+		InteractionHistory intHist = InteractionHistory.getInstance();
+		NdefMessage attackNdefMessage;
+		try {
+			attackNdefMessage = new NdefMessage(new String("attack,attacker:"
+											+ intHist.getDisplayName() 
+											+ ",attackerid:" + intHist.getId()).getBytes());
+		} catch (FormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		mNfcAdapter.enableForegroundNdefPush(this, attackNdefMessage);
+	}
+	
 	@Override
 	protected void onNewIntent(Intent intent) {
 	    // NDEF exchange mode
@@ -45,7 +64,7 @@ public class NfcHandle extends Activity {
 	        		
 	        	}
 	        }
-	        Toast.makeText(this, "sent friend request via nfc!", Toast.LENGTH_LONG).show();
+	        Toast.makeText(this, "You got 'em!", Toast.LENGTH_LONG).show();
 	    }
 	}
 
