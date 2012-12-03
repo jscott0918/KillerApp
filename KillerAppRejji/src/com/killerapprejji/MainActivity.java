@@ -1,12 +1,14 @@
 package com.killerapprejji;
 
 import java.util.Calendar;
+import android.util.Log;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -21,8 +23,8 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        NfcHandle nfc = new NfcHandle();
-        nfc.setIdleMessage();
+        //NfcHandle nfc = new NfcHandle();
+        //nfc.setIdleMessage();
         attackButton = (Button)findViewById(R.id.attack_button);
         defendButton = (Button)findViewById(R.id.defend_button);
         setContentView(R.layout.activity_main);
@@ -65,8 +67,6 @@ public class MainActivity extends Activity {
     
     public boolean onClickAttackButton(View view){
     	boolean ret = false;
-    	NfcHandle nfc = new NfcHandle();
-    	nfc.setAttackMessage();
     	if(ActionAvailability.getInstance().getCanAttack() < Calendar.getInstance().getTimeInMillis()){
     		Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
     		startActivityForResult(startNewActivityOpen, 0);
@@ -81,8 +81,9 @@ public class MainActivity extends Activity {
     }
     
     public boolean onClickDefendButton(View view){
-    	NfcHandle nfc = new NfcHandle();
-    	nfc.setDefendMessage();
+    	Log.d("MainActivity", "starting onClickDefendButton");
+    	Intent setDefendMessage = new Intent("defend", null, this, NfcHandle.class);
+    	startActivity(setDefendMessage);
     	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
     	startActivityForResult(startNewActivityOpen, 0);
     	return true;

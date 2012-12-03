@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
+import android.telephony.TelephonyManager;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -27,17 +30,21 @@ public class NfcHandle extends Activity {
 			    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 			// Intent filters for exchanging over p2p.
 			IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+			IntentFilter defendDetected = new IntentFilter("defend");
 			try {
 			    ndefDetected.addDataType("application/com.killerapprejji.NfcHandle");
 			} catch (MalformedMimeTypeException e) {
 			}
-			mNdefExchangeFilters = new IntentFilter[] { ndefDetected };
+			Log.d(this.toString(), "mNfcPendingIntent: " + mNfcPendingIntent.toString());
+			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
+			finish();
 		//setContentView(R.layout.activity_nfc_handle);
 	}
 	
 	protected void onResume(){
 		NdefMessage msg = (NdefMessage) getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
 		byte[] payload = msg.getRecords()[0].getPayload();
+		Toast.makeText(getBaseContext(), payload.toString(), 40000);
 	}
 	
 	public void setAttackMessage(){
@@ -70,11 +77,12 @@ public class NfcHandle extends Activity {
 	}
 	public void setIdleMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
+		TelephonyManager tm = (TelephonyManager) getBaseContext().getSystemService(Context.TELEPHONY_SERVICE);
 		NdefMessage attackNdefMessage = null;
 		try {
 			attackNdefMessage = new NdefMessage(new String("idle,defender:"
 											+ intHist.getDisplayName() 
-											+ ",defenderid:" + intHist.getId()).getBytes());
+											+ ",defenderid:" + tm.getDeviceId()).getBytes());
 		} catch (FormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -100,7 +108,7 @@ public class NfcHandle extends Activity {
 	@Override
 	protected void onNewIntent(Intent intent) {
 	    // NDEF exchange mode
-	    if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+	    if (NfcAdapter.ACTION_NDEF_DISCOVERED == (intent.getAction())) {
 	        NdefMessage[] msgs = getNdefMessages(intent);
 	        for(int i = 0; i < msgs.length; i++){
 	        	if(new String(msgs[0].toByteArray()).contains("attack")){
@@ -109,6 +117,11 @@ public class NfcHandle extends Activity {
 	        }
 	        Toast.makeText(this, "You got 'em!", Toast.LENGTH_LONG).show();
 	    }
+	    else if("defend" == intent.getAction()){
+	    	Toast.makeText(this, "Defend action intent filtered by onNewIntent in NfcHandle", Toast.LENGTH_LONG).show();
+	    }
+	    
+	    finish();
 	}
 
 	private void enableNdefExchangeMode() {
