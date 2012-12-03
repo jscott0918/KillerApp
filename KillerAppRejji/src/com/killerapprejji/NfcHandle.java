@@ -51,7 +51,8 @@ public class NfcHandle extends Activity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		mNfcAdapter.enableForegroundNdefPush(this, attackNdefMessage);
+		// need to come up with a way to end if the above try/catch fails
+		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
 	
 	@Override
