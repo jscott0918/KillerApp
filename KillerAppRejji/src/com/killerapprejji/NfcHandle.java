@@ -32,7 +32,7 @@ public class NfcHandle extends Activity {
 			} catch (MalformedMimeTypeException e) {
 			}
 			mNdefExchangeFilters = new IntentFilter[] { ndefDetected };
-		setContentView(R.layout.activity_nfc_handle);
+		//setContentView(R.layout.activity_nfc_handle);
 	}
 	
 	@Override
