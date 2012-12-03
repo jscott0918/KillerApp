@@ -4,14 +4,16 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.nfc.*;
 
 public class DefendActivity extends Activity{
-	ProgressBar progressBar;// = (ProgressBar)findViewById(R.id.attack_progress_bar);
+	ProgressBar progressBar;
 	NfcAdapter nfc;
+	boolean flag = false;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,16 +29,18 @@ public class DefendActivity extends Activity{
 				// If time runs out, return to main menu
 				if (progressBar.getProgress() == progressBar.getMax())
 				{
+					flag = true;
 					callFinish();
 				}
 		        // if a communications interrupt is received, cancel the timer and handle the communication
-		        //initiateNFCAttack();
 			}
 		}, 0, 1000);
-        this.setResult(0);
 	}
 	
 	private void callFinish(){
+		Intent returnIntent = new Intent();
+		returnIntent.putExtra("result", flag);
+		setResult(RESULT_OK,returnIntent);
 		finish();
 	}
 
