@@ -2,6 +2,8 @@ package com.killerapprejji;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -42,24 +44,21 @@ public class MainActivity extends Activity {
     	return true;
     }
     
-    public boolean disableDefendButton(){
-    	defendButton.setClickable(false);
-    	return true;
+    public void disableDefendButton(){
+    	findViewById(R.id.defend_button).setEnabled(false);
     }
     
-    public boolean disableAttackButton(){
+    public void disableAttackButton(){
     	attackButton.setClickable(false);
-    	return true;
     }
     
-    public boolean enableDefendButton(){
-    	defendButton.setClickable(true);
-    	return true;
+    public void enableDefendButton(){
+    	findViewById(R.id.defend_button).setEnabled(true);
+    	
     }
     
-    public boolean enableAttackButton(){
+    public void enableAttackButton(){
     	attackButton.setClickable(true);
-    	return true;
     }
     
     public boolean onClickAttackButton(View view){
@@ -81,5 +80,28 @@ public class MainActivity extends Activity {
     	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
     	startActivityForResult(startNewActivityOpen, 0);
     	return true;
+    }
+    
+    protected void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+    	if (resultCode != RESULT_OK)
+    		return;
+    	boolean flag = data.getBooleanExtra("result", false);
+    	if (flag == true)
+    	{
+    		findViewById(R.id.defend_button).getHandler().post(new Runnable(){
+	    		public void run(){
+	    			disableDefendButton();}
+	    			});
+    		final Timer timer = new Timer();
+    		timer.schedule(new TimerTask(){
+    			public void run(){
+    				findViewById(R.id.defend_button).getHandler().post(new Runnable(){
+    		    		public void run(){
+    		    			enableDefendButton();}
+    		    			});
+    			}
+    		}, 60000);
+    	}
     }
 }

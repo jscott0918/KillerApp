@@ -11,14 +11,11 @@ import android.view.View.OnClickListener;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.nfc.*;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class AttackActivity extends Activity{
-	ProgressBar progressBar;// = (ProgressBar)findViewById(R.id.attack_progress_bar);
+	ProgressBar progressBar;
 	NfcAdapter nfc;
 	@Override
-	//public void onCreate(Bundle savedInstanceState) {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);    
         setContentView(R.layout.activity_attack);
