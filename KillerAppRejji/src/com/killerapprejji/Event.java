@@ -1,28 +1,22 @@
 package com.killerapprejji;
 
 public class Event {
-	private String date;
-	private String time;
+	private String datetime;
 	private String attacker;
 	private String attackerId;
 	private String defender;
 	private String defenderId;
 	
-	public Event(String indate, String intime, String inattacker, String inattackerId, String indefender, String indefenderId){
-		date = indate;
-		time = intime;
+	public Event(String indatetime, String inattacker, String inattackerId, String indefender, String indefenderId){
+		datetime = indatetime;
 		attacker = inattacker;
 		attackerId = inattackerId;
 		defender = indefender;
 		defenderId = indefenderId;
 	}
 	
-	public String getDate(){
-		return date;
-	}
-	
-	public String getTime(){
-		return time;
+	public String getDateTime(){
+		return datetime;
 	}
 	
 	public String getAttacker(){
