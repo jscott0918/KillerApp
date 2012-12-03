@@ -21,6 +21,8 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        NfcHandle nfc = new NfcHandle();
+        nfc.setIdleMessage();
         attackButton = (Button)findViewById(R.id.attack_button);
         defendButton = (Button)findViewById(R.id.defend_button);
         setContentView(R.layout.activity_main);
@@ -79,6 +81,8 @@ public class MainActivity extends Activity {
     }
     
     public boolean onClickDefendButton(View view){
+    	NfcHandle nfc = new NfcHandle();
+    	nfc.setDefendMessage();
     	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
     	startActivityForResult(startNewActivityOpen, 0);
     	return true;
