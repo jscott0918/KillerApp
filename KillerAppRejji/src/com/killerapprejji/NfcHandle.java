@@ -2,14 +2,17 @@ package com.killerapprejji;
 
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
 import android.view.Menu;
+import android.widget.Toast;
 
 public class NfcHandle extends Activity {
 	
@@ -25,11 +28,25 @@ public class NfcHandle extends Activity {
 			// Intent filters for exchanging over p2p.
 			IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
 			try {
-			    ndefDetected.addDataType("text/plain");
+			    ndefDetected.addDataType("application/com.killerapprejji.NfcHandle");
 			} catch (MalformedMimeTypeException e) {
 			}
 			mNdefExchangeFilters = new IntentFilter[] { ndefDetected };
 		setContentView(R.layout.activity_nfc_handle);
+	}
+	
+	@Override
+	protected void onNewIntent(Intent intent) {
+	    // NDEF exchange mode
+	    if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(intent.getAction())) {
+	        NdefMessage[] msgs = getNdefMessages(intent);
+	        for(int i = 0; i < msgs.length; i++){
+	        	if(new String(msgs[0].toByteArray()).contains("attack")){
+	        		
+	        	}
+	        }
+	        Toast.makeText(this, "sent friend request via nfc!", Toast.LENGTH_LONG).show();
+	    }
 	}
 
 	private void enableNdefExchangeMode() {
@@ -41,6 +58,37 @@ public class NfcHandle extends Activity {
 		}
 	    mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent, 
 	        mNdefExchangeFilters, null);
+	}
+	
+	NdefMessage[] getNdefMessages(Intent intent) {
+	    // Parse the intent
+	    NdefMessage[] msgs = null;
+	    String action = intent.getAction();
+	    if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
+	        || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
+	        Parcelable[] rawMsgs = 
+	            intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
+	        if (rawMsgs != null) {
+	            msgs = new NdefMessage[rawMsgs.length];
+	            for (int i = 0; i < rawMsgs.length; i++) {
+	                msgs[i] = (NdefMessage) rawMsgs[i];
+	            }
+	        } else {
+	            // Unknown tag type
+	            byte[] empty = new byte[] {};
+	            NdefRecord record = 
+	                new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, empty, empty);
+	            NdefMessage msg = new NdefMessage(new NdefRecord[] {
+	                record
+	            });
+	            msgs = new NdefMessage[] {
+	                msg
+	            };
+	        }
+	    } else {
+	        finish();
+	    }
+	    return msgs;
 	}
 	
 	@Override
