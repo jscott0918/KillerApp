@@ -6,7 +6,7 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="15" />
-    <permission android:name="NFC" android:permissionGroup="NFC"></permission>
+    <permission android:name="android.permission.NFC" android:permissionGroup="NFC"></permission>
 
     <application
         android:icon="@drawable/ninjahead"
@@ -15,7 +15,7 @@
         <activity android:name=".MainActivity" android:label="@string/title_activity_main">
             <intent-filter>
 		      <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
-		      <data android:mimeType="application/com.killerapprejji.attacked"/>
+		      <data android:mimeType="application/com.killerapprejji.NfcHandle"/>
 		      <category android:name="android.intent.category.DEFAULT"/>
 		    </intent-filter>
         </activity>
@@ -29,6 +29,13 @@
         <activity android:launchMode="standard" android:screenOrientation="portrait" android:label="@string/menu_settings" android:alwaysRetainTaskState="true" android:noHistory="false" android:description="@string/menu_settings" android:configChanges="keyboard" android:theme="@style/AppTheme" android:parentActivityName="@string/title_activity_main" android:icon="@drawable/ninjahead" android:name=".SetInfo"></activity>
         <activity android:name=".DefendActivity" android:label="@string/defend_button" android:theme="@style/AppTheme"></activity>
         <activity android:name="DisplayInteractions" android:theme="@style/AppTheme" android:label="@string/Stats" android:parentActivityName="@string/title_activity_main"></activity>
+        <activity android:name="NfcHandle">
+            <intent-filter >
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/com.killerapprejji.NfcHandle"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
