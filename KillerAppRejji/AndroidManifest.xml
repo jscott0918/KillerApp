@@ -20,6 +20,7 @@
             <intent-filter>
 		      <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
 		      <data android:mimeType="application/com.killerapprejji.MainActivity"/>
+		      <data android:mimeType="application/*"/>
 		      <category android:name="android.intent.category.DEFAULT"/>
 		    </intent-filter>
         </activity>

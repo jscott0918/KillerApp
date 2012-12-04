@@ -38,27 +38,23 @@ public class MainActivity extends Activity {
 		mNfcPendingIntent = PendingIntent.getActivity(this, 0,
 			    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 		// Intent filters for exchanging over p2p.
-		IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
-		IntentFilter defendDetected = new IntentFilter("defend");
-		/*
-		Intent getIntent = getIntent();
-		String intMessage = getIntent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		Log.d("OnCreate()", "intMessage: " + intMessage);
-		if(intMessage.equals("defend")){
-			setDefendMessage();
-		} else if (intMessage.equals("attack")){
-			setAttackMessage();
+		if(mNfcAdapter != null){
+			IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+			IntentFilter defendDetected = new IntentFilter("defend");
+			IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
+		    try {
+		        ndef.addDataType("*/*");    /* Handles all MIME based dispatches.
+		                                       You should specify only the ones that you need. */
+		    }
+		    catch (MalformedMimeTypeException e) {
+		        throw new RuntimeException("fail", e);
+		    }
+		   IntentFilter[] intentFiltersArray = new IntentFilter[] {ndef, };
+			Log.d(this.toString(), "mNfcPendingIntent: ");
+			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
+	        //NfcHandle nfc = new NfcHandle();
+	        //nfc.setIdleMessage();
 		}
-		try {
-		    ndefDetected.addDataType("application/com.killerapprejji.NfcHandle");
-		} catch (MalformedMimeTypeException e) {
-			Log.e("MalformedMimTypeException", e.getStackTrace().toString());
-		}
-		*/
-		Log.d(this.toString(), "mNfcPendingIntent: ");
-		mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
-        //NfcHandle nfc = new NfcHandle();
-        //nfc.setIdleMessage();
         attackButton = (Button)findViewById(R.id.attack_button);
         defendButton = (Button)findViewById(R.id.defend_button);
         setContentView(R.layout.activity_main);
@@ -218,7 +214,9 @@ public class MainActivity extends Activity {
     	boolean ret = false;
     	if(ActionAvailability.getInstance().getCanAttack() < Calendar.getInstance().getTimeInMillis()){
     		Log.d("MainActivity", "starting onClickAttackButton");
-        	setAttackMessage();
+        	if(mNfcAdapter != null){
+        		setAttackMessage();
+        	}
         	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
     		startActivityForResult(startNewActivityOpen, 0);
     		
@@ -235,7 +233,9 @@ public class MainActivity extends Activity {
     public boolean onClickDefendButton(View view){
     	Log.d("MainActivity", "starting onClickDefendButton");
     	if(ActionAvailability.getInstance().getCanDefend() < Calendar.getInstance().getTimeInMillis()){
-	    	setDefendMessage();
+	    	if(mNfcAdapter != null){
+	    		setDefendMessage();
+	    	}
 	    	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
 	    	startActivity(startNewActivityOpen);
 	    	ActionAvailability.getInstance().increaseCanDefend(60000);
