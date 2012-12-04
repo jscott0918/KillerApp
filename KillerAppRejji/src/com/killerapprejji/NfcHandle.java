@@ -47,7 +47,6 @@ public class NfcHandle extends Activity {
 		}
 		Log.d(this.toString(), "mNfcPendingIntent: ");
 		mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
-		finish();
 		//setContentView(R.layout.activity_nfc_handle);
 	}
 	

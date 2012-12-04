@@ -73,10 +73,10 @@ public class MainActivity extends Activity {
         	Intent setAttackMessage = new Intent("attack", null, this, NfcHandle.class);
         	setAttackMessage.putExtra(EXTRA_MESSAGE, "attack");
         	startActivity(setAttackMessage);
-        	/*
+        	
         	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
     		startActivityForResult(startNewActivityOpen, 0);
-    		*/
+    		
     		ActionAvailability.getInstance().increaseCanAttack(60000);
     		ret = true;
     	}
