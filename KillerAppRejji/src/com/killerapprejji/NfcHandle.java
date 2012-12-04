@@ -42,7 +42,7 @@ public class NfcHandle extends Activity {
 	
 	public void setAttackMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
-		NdefMessage attackNdefMessage;
+		NdefMessage attackNdefMessage = null;
 		try {
 			attackNdefMessage = new NdefMessage(new String("attack,attacker:"
 											+ intHist.getDisplayName() 
