@@ -224,7 +224,7 @@ public class MainActivity extends Activity {
     		ret = true;
     	}
     	else {
-    		Toast.makeText(getApplicationContext(), "Cannot attack until: " + new Date(ActionAvailability.getInstance().getCanAttack()), 10000).show();
+    		Toast.makeText(getApplicationContext(), "Cannot attack until: " + new Date(ActionAvailability.getInstance().getCanAttack()), 3000).show();
     		ret = false;
     	}
     	return ret;
@@ -241,7 +241,7 @@ public class MainActivity extends Activity {
 	    	ActionAvailability.getInstance().increaseCanDefend(60000);
     	}
     	else {
-    		Toast.makeText(getApplicationContext(), "Cannot defend until: " + new Date(ActionAvailability.getInstance().getCanAttack()), 10000).show();
+    		Toast.makeText(getApplicationContext(), "Cannot defend until: " + new Date(ActionAvailability.getInstance().getCanDefend()), 3000).show();
     	}
     	return true;
     }
