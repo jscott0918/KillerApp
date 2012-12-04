@@ -40,6 +40,7 @@ public class MainActivity extends Activity {
 		// Intent filters for exchanging over p2p.
 		IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
 		IntentFilter defendDetected = new IntentFilter("defend");
+		/*
 		Intent getIntent = getIntent();
 		String intMessage = getIntent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		Log.d("OnCreate()", "intMessage: " + intMessage);
@@ -53,6 +54,7 @@ public class MainActivity extends Activity {
 		} catch (MalformedMimeTypeException e) {
 			Log.e("MalformedMimTypeException", e.getStackTrace().toString());
 		}
+		*/
 		Log.d(this.toString(), "mNfcPendingIntent: ");
 		mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
         //NfcHandle nfc = new NfcHandle();
@@ -61,6 +63,13 @@ public class MainActivity extends Activity {
         defendButton = (Button)findViewById(R.id.defend_button);
         setContentView(R.layout.activity_main);
         
+    }
+    
+    protected void onPause(){
+    	super.onPause();
+    }
+    protected void onResume(){
+    	super.onResume();
     }
     
     public void setAttackMessage(){
@@ -225,9 +234,15 @@ public class MainActivity extends Activity {
     
     public boolean onClickDefendButton(View view){
     	Log.d("MainActivity", "starting onClickDefendButton");
-    	setDefendMessage();
-    	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
-    	startActivityForResult(startNewActivityOpen, 0);
+    	if(ActionAvailability.getInstance().getCanDefend() < Calendar.getInstance().getTimeInMillis()){
+	    	setDefendMessage();
+	    	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
+	    	startActivity(startNewActivityOpen);
+	    	ActionAvailability.getInstance().increaseCanDefend(60000);
+    	}
+    	else {
+    		Toast.makeText(getApplicationContext(), "Cannot defend until: " + new Date(ActionAvailability.getInstance().getCanAttack()), 10000).show();
+    	}
     	return true;
     }
     
