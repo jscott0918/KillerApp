@@ -10,10 +10,12 @@ import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.tech.*;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
@@ -26,6 +28,7 @@ public class MainActivity extends Activity {
 	
 	Button attackButton = null;
 	Button defendButton = null;
+	private IntentFilter[] intentFiltersArray;
 	private static NfcAdapter mNfcAdapter = null;
 	private static PendingIntent mNfcPendingIntent = null;
 	private static IntentFilter mNdefExchangeFilters[] = null;
@@ -35,8 +38,9 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-		mNfcPendingIntent = PendingIntent.getActivity(this, 0,
-			    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(
+        	    this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        mNfcPendingIntent = pendingIntent;
 		// Intent filters for exchanging over p2p.
 		if(mNfcAdapter != null){
 			IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
@@ -49,7 +53,7 @@ public class MainActivity extends Activity {
 		    catch (MalformedMimeTypeException e) {
 		        throw new RuntimeException("fail", e);
 		    }
-		   IntentFilter[] intentFiltersArray = new IntentFilter[] {ndef, };
+		   this.intentFiltersArray = new IntentFilter[] {ndef, };
 			Log.d(this.toString(), "mNfcPendingIntent: ");
 			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
 	        //NfcHandle nfc = new NfcHandle();
@@ -63,10 +67,33 @@ public class MainActivity extends Activity {
     
     protected void onPause(){
     	super.onPause();
+    	 mNfcAdapter.disableForegroundDispatch(this);
     }
     protected void onResume(){
     	super.onResume();
+    	 mNfcAdapter.enableForegroundDispatch(this,mNfcPendingIntent,intentFiltersArray, new String[][]{ new String[] { NfcF.class.getName(),NfcA.class.getName(),NfcB.class.getName()} });
     }
+    
+    
+    
+    protected void onNewIntent(Intent intent) {
+	    // NDEF exchange mode
+    	Log.d("onNewIntent", intent.getAction());
+	    if (NfcAdapter.ACTION_NDEF_DISCOVERED == (intent.getAction())) {
+	        NdefMessage[] msgs = getNdefMessages(intent);
+	        for(int i = 0; i < msgs.length; i++){
+	        	if(new String(msgs[0].toByteArray()).contains("attack")){
+	        		
+	        	}
+	        }
+	        Toast.makeText(this, "You got 'em!", Toast.LENGTH_LONG).show();
+	    }
+	    else if("defend" == intent.getAction()){
+	    	Log.d("found defend intent", "toast message may pop up");
+	    }
+	    
+	    finish();
+	}
     
     public void setAttackMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
@@ -115,24 +142,7 @@ public class MainActivity extends Activity {
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
 	
-	protected void onNewIntent(Intent intent) {
-	    // NDEF exchange mode
-	    if (NfcAdapter.ACTION_NDEF_DISCOVERED == (intent.getAction())) {
-	        NdefMessage[] msgs = getNdefMessages(intent);
-	        for(int i = 0; i < msgs.length; i++){
-	        	if(new String(msgs[0].toByteArray()).contains("attack")){
-	        		
-	        	}
-	        }
-	        Toast.makeText(this, "You got 'em!", Toast.LENGTH_LONG).show();
-	    }
-	    else if("defend" == intent.getAction()){
-	    	Log.d("found defend intent", "toast message may pop up");
-	    	Toast.makeText(this, "Defend action intent filtered by onNewIntent in NfcHandle", Toast.LENGTH_LONG).show();
-	    }
-	    
-	    finish();
-	}
+	
 
 	private void enableNdefExchangeMode() {
 		try {
