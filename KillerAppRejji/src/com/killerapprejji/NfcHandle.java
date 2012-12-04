@@ -4,6 +4,8 @@ import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcAdapter.OnNdefPushCompleteCallback;
+import android.nfc.NfcEvent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;
@@ -25,6 +27,15 @@ public class NfcHandle extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/*mNfcAdapter.setOnNdefPushCompleteCallback(new OnNdefPushCompleteCallback(){
+
+			@Override
+			public void onNdefPushComplete(NfcEvent event) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		}, this);*/
 		Log.d("NfcHandle.onCreate", "starting onCreate");
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		mNfcPendingIntent = PendingIntent.getActivity(this, 0,
