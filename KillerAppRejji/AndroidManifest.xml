@@ -23,7 +23,7 @@
 		      <category android:name="android.intent.category.DEFAULT"/>
 		    </intent-filter>
         </activity>
-        <activity android:name=".SplashScreen" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
+        <activity android:name=".SplashScreen" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER"/>  
