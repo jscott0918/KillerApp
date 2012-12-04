@@ -50,10 +50,18 @@ public class NfcHandle extends Activity {
 		//setContentView(R.layout.activity_nfc_handle);
 	}
 	
+	protected void onPause(){
+		super.onPause();
+		Intent intent = new Intent(this, MainActivity.class);
+	    startActivity(intent);   
+		
+	}
+	
 	protected void onResume(){
+		super.onResume();
+		onPause();
 		Log.d("NfcHandle.onResume", "starting onResume");
-		NdefMessage msg = (NdefMessage) getIntent().getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)[0];
-		byte[] payload = msg.getRecords()[0].getPayload();
+		
 	}
 	
 	public void setAttackMessage(){
