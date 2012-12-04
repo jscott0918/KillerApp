@@ -3,6 +3,7 @@ package com.killerapprejji;
 import java.util.ArrayList;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.app.Activity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,6 +18,15 @@ public class DisplayInteractions extends Activity {
 	
 	TextView textview = null;
 	
+	// Set up a handler to poll events when this activity is resumed
+	private final Runnable mUpdateScoreList = new Runnable() {
+		public void run() {
+			parseEvents(dbHelper.getEvents());
+		}
+	};
+	
+	private final Handler mHandler = new Handler();
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -25,21 +35,22 @@ public class DisplayInteractions extends Activity {
 		dbHelper = new SqlDatabaseHelper(this);
 		textview = (TextView)findViewById(R.id.kill_record);
 		
-		parseEvents(dbHelper.getEvents());
-		
 		// Show the Up button in the action bar.
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
-
-	private void parseEvents(ArrayList<Event> history){
-		for(int i=0; i<history.size(); i++){
-			textview.append(constructEntry(history.get(i)) + "\n");
-		}
+	
+	@Override
+	protected void onResume() {
+		mHandler.postDelayed(mUpdateScoreList, 10* 1000);
+		super.onResume();
 	}
 	
-	private String constructEntry(Event e){
-		return ( e.getDateTime() + " " + e.getAttacker() + " " + e.getDefender() );
+	@Override
+	protected void onPause() {
+		mHandler.removeCallbacks(mUpdateScoreList);
+		super.onPause();
 	}
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -64,5 +75,17 @@ public class DisplayInteractions extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+
+	private void parseEvents(ArrayList<Event> history){
+		for(int i=0; i<history.size(); i++){
+			textview.append(constructEntry(history.get(i)) + "\n");
+		}
+	}
+	
+	private String constructEntry(Event e){
+		return ( e.getDateTime() + " " + e.getAttacker() + " " + e.getDefender() );
+	}
+	
 
 }
