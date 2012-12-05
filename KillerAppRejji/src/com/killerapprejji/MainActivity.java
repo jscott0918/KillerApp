@@ -67,12 +67,19 @@ public class MainActivity extends Activity {
     
     protected void onPause(){
     	super.onPause();
-    	 mNfcAdapter.disableForegroundDispatch(this);
+    	if (mNfcAdapter != null){
+    		mNfcAdapter.disableForegroundDispatch(this);
+    	}
     }
     protected void onResume(){
     	super.onResume();
-    	 mNfcAdapter.enableForegroundDispatch(this,mNfcPendingIntent,intentFiltersArray, new String[][]{ new String[] { NfcF.class.getName(),NfcA.class.getName(),NfcB.class.getName()} });
+    	if (mNfcAdapter != null) {
+    		mNfcAdapter.enableForegroundDispatch(this,mNfcPendingIntent,intentFiltersArray, new String[][]{ new String[] { NfcF.class.getName(),NfcA.class.getName(),NfcB.class.getName()} });
+    	}
     }
+
+
+
     
     protected void onNewIntent(Intent intent) {
 	    // NDEF exchange mode

@@ -37,6 +37,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(DICTIONARY_TABLE_CREATE);
 		db.execSQL(USERNAME_TABLE_CREATE);
+		
 	}
 
 	@Override
