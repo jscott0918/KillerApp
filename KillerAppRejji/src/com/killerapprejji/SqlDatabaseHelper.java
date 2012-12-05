@@ -87,9 +87,16 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		return results;
 	}
 	
+	/* Set the username as entered in the settings */
 	public void setName(String name)
 	{
 		/* STUBBED */
 	}
-
+	
+	/* Get the username from the database */
+	public String getName()
+	{
+		/* STUBBED */
+		return "";
+	}
 }
