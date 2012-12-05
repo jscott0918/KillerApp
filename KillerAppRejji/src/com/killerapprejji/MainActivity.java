@@ -77,7 +77,9 @@ public class MainActivity extends Activity {
     		mNfcAdapter.enableForegroundDispatch(this,mNfcPendingIntent,intentFiltersArray, new String[][]{ new String[] { NfcF.class.getName(),NfcA.class.getName(),NfcB.class.getName()} });
     	}
     }
-    
+
+
+
     
     protected void onNewIntent(Intent intent) {
 	    // NDEF exchange mode
@@ -121,6 +123,7 @@ public class MainActivity extends Activity {
 		
 		// need to come up with a way to end if the above try/catch fails
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+		Log.d("mNfcAdapter", "mNfcAdapter val:" + ndefRecords.toString());
 	}
 	public void setIdleMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
@@ -247,6 +250,7 @@ public class MainActivity extends Activity {
     	Log.d("MainActivity", "starting onClickDefendButton");
     	if(ActionAvailability.getInstance().getCanDefend() < Calendar.getInstance().getTimeInMillis()){
 	    	if(mNfcAdapter != null){
+	    		Log.d("MainActivity", "In mNfcAdapter != null");
 	    		setDefendMessage();
 	    	}
 	    	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
