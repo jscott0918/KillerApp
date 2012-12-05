@@ -59,7 +59,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 			mNfcAdapter.setNdefPushMessageCallback(this, this);
 		}
 		if(getNdefMessages(getIntent()) != null){
-			Log.d("MainActivity", getNdefMessages(getIntent())[0].getRecords()[0].getPayload());
+			Log.d("MainActivity", getNdefMessages(getIntent())[0].getRecords()[0].getPayload().toString());
 		}
         setContentView(R.layout.activity_main);
     }
