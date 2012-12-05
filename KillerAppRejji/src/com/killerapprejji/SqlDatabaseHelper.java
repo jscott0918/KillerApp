@@ -20,7 +20,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
                 "attackerid" + " VARCHAR(64), " +
                 "defender" + " TEXT, " +
                 "defenderid" + " VARCHAR(64), " +
-                "timestamp" + " TEXT " +
+                "timestamp" + " INT " +
                 ");";
     private static final String USERNAME_TABLE_CREATE = 
     			"CREATE TABLE IF NOT EXISTS" + USERNAME_TABLE_NAME 
@@ -76,11 +76,11 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		
 		resultscursor = db.query(DICTIONARY_TABLE_NAME, columnNames, null, null, null, null, null);
 		while (!resultscursor.isAfterLast()) {
-			Event e = new Event(resultscursor.getString(4),    // timestamp
+			Event e = new Event(resultscursor.getLong(4),      // timestamp
 					            resultscursor.getString(0),    // attacker
 					            resultscursor.getString(1),    // attackerid
 					            resultscursor.getString(2),    // defender
-					            resultscursor.getString(3)    // defenderid
+					            resultscursor.getString(3)     // defenderid
 					            );
 			results.add(e);
 			resultscursor.moveToNext();
