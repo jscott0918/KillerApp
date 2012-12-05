@@ -10,6 +10,8 @@ import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
+import android.nfc.NfcAdapter.CreateNdefMessageCallback;
+import android.nfc.NfcEvent;
 import android.nfc.tech.*;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -24,7 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	
 	Button attackButton = null;
 	Button defendButton = null;
@@ -33,6 +35,7 @@ public class MainActivity extends Activity {
 	private static PendingIntent mNfcPendingIntent = null;
 	private static IntentFilter mNdefExchangeFilters[] = null;
 	public static final String EXTRA_MESSAGE = "com.killerappRejji.MainActivity.MESSAGE";
+	private static String mCurrentStatus = "idle,defender:" + InteractionHistory.getInstance().getDisplayName() + ",defenderid:" + InteractionHistory.getInstance().getDisplayName();
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,8 +59,6 @@ public class MainActivity extends Activity {
 		   this.intentFiltersArray = new IntentFilter[] {ndef, };
 			Log.d(this.toString(), "mNfcPendingIntent: ");
 			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
-	        //NfcHandle nfc = new NfcHandle();
-	        //nfc.setIdleMessage();
 		}
         attackButton = (Button)findViewById(R.id.attack_button);
         defendButton = (Button)findViewById(R.id.defend_button);
@@ -109,6 +110,7 @@ public class MainActivity extends Activity {
 				+ ",attackerid:" + "1").getBytes());
 		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+		mNfcAdapter.setNdefPushMessageCallback(this, this);
 	}
 	
 	public void setDefendMessage(){
@@ -147,8 +149,6 @@ public class MainActivity extends Activity {
 		// need to come up with a way to end if the above try/catch fails
 		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
-	
-	
 
 	private void enableNdefExchangeMode() {
 		try {
@@ -233,6 +233,7 @@ public class MainActivity extends Activity {
         	if(mNfcAdapter != null){
         		setAttackMessage();
         	}
+        	mCurrentStatus = "attack,attacker:" + InteractionHistory.getInstance().getDisplayName() + ",attackerid:" + InteractionHistory.getInstance().getDisplayName();
         	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
     		startActivityForResult(startNewActivityOpen, 0);
     		
@@ -253,6 +254,7 @@ public class MainActivity extends Activity {
 	    		Log.d("MainActivity", "In mNfcAdapter != null");
 	    		setDefendMessage();
 	    	}
+	    	mCurrentStatus = "defend,defender:" + InteractionHistory.getInstance().getDisplayName() + ",defenderid:" + InteractionHistory.getInstance().getDisplayName();
 	    	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
 	    	startActivity(startNewActivityOpen);
 	    	ActionAvailability.getInstance().increaseCanDefend(60000);
@@ -285,4 +287,29 @@ public class MainActivity extends Activity {
     		}, 60000);
     	}
     }
+
+	@Override
+	public NdefMessage createNdefMessage(NfcEvent event) {
+        
+        NdefMessage msg;
+                
+                    msg = new NdefMessage(new NdefRecord[] {
+                            createApplicationRecord(mCurrentStatus.getBytes())
+                    });
+                    return msg;
+                
+            
+    }     
+    
+    private NdefRecord createApplicationRecord(byte[] payload)
+    {    
+        String mimeType = "com.killerapprejji.MainActivity";        
+
+        byte[] mimeBytes = mimeType.getBytes();    
+
+        NdefRecord mimeRecord = new NdefRecord(NdefRecord.TNF_EXTERNAL_TYPE, mimeBytes, new byte[0], payload);
+        return  mimeRecord;
+        
+    }
+    
 }
