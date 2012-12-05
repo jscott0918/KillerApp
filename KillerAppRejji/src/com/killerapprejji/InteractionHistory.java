@@ -49,9 +49,9 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 		return displayName;
 	}
 	
-	public String getId(){
+	/*public String getId(){
 		return Secure.getString(new NfcHandle().getContentResolver(), Secure.ANDROID_ID);
-	}
+	}*/
 	
 	public static InteractionHistory getInstance(){
 		if(interactionHistory == null){
