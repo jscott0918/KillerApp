@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
@@ -17,7 +16,6 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.app.Activity;
 import android.app.PendingIntent;
-import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.IntentFilter.MalformedMimeTypeException;
@@ -44,26 +42,26 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
         PendingIntent pendingIntent = PendingIntent.getActivity(
         	    this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         mNfcPendingIntent = pendingIntent;
+        Log.d("MainActivity", "in onCreate");
 		// Intent filters for exchanging over p2p.
 		if(mNfcAdapter != null){
 			IntentFilter ndefDetected = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
 			IntentFilter defendDetected = new IntentFilter("defend");
 			IntentFilter ndef = new IntentFilter(NfcAdapter.ACTION_NDEF_DISCOVERED);
 		    try {
-		        ndef.addDataType("*/*");    /* Handles all MIME based dispatches.
-		                                       You should specify only the ones that you need. */
+		        ndef.addDataType("application/com.killerapprejji.*");
 		    }
 		    catch (MalformedMimeTypeException e) {
 		        throw new RuntimeException("fail", e);
 		    }
 		   this.intentFiltersArray = new IntentFilter[] {ndef, };
-			Log.d(this.toString(), "mNfcPendingIntent: ");
 			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
+			mNfcAdapter.setNdefPushMessageCallback(this, this);
 		}
-        attackButton = (Button)findViewById(R.id.attack_button);
-        defendButton = (Button)findViewById(R.id.defend_button);
+		if(getNdefMessages(getIntent()) != null){
+			Log.d("MainActivity", getNdefMessages(getIntent())[0].getRecords()[0].getPayload());
+		}
         setContentView(R.layout.activity_main);
-        
     }
     
     protected void onPause(){
@@ -75,12 +73,12 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
     protected void onResume(){
     	super.onResume();
     	if (mNfcAdapter != null) {
-    		mNfcAdapter.enableForegroundDispatch(this,mNfcPendingIntent,intentFiltersArray, new String[][]{ new String[] { NfcF.class.getName(),NfcA.class.getName(),NfcB.class.getName()} });
+    		mNfcAdapter.enableForegroundDispatch(this,mNfcPendingIntent,intentFiltersArray, 
+    				new String[][]{ new String[] { NfcF.class.getName(),NfcA.class.getName(),NfcB.class.getName()} });
+    		mNfcAdapter.setNdefPushMessageCallback(this, this);
+
     	}
     }
-
-
-
     
     protected void onNewIntent(Intent intent) {
 	    // NDEF exchange mode
@@ -97,8 +95,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	    else if("defend" == intent.getAction()){
 	    	Log.d("found defend intent", "toast message may pop up");
 	    }
-	    
-	    finish();
 	}
     
     public void setAttackMessage(){
@@ -109,8 +105,8 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 				+ intHist.getDisplayName() 
 				+ ",attackerid:" + "1").getBytes());
 		attackNdefMessage = new NdefMessage(ndefRecords[0]);
-		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
-		mNfcAdapter.setNdefPushMessageCallback(this, this);
+		//mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+		//mNfcAdapter.setNdefPushMessageCallback(this, this);
 	}
 	
 	public void setDefendMessage(){
@@ -124,7 +120,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		
 		// need to come up with a way to end if the above try/catch fails
-		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+		//mNfcAdapter.Message(attackNdefMessage, this);
 		Log.d("mNfcAdapter", "mNfcAdapter val:" + ndefRecords.toString());
 	}
 	public void setIdleMessage(){
@@ -136,7 +132,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 				+ ",attackerid:" + "1").getBytes());
 		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		// need to come up with a way to end if the above try/catch fails
-		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+		//mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
 	public void setDeadMessage(){
 		InteractionHistory intHist = InteractionHistory.getInstance();
@@ -147,7 +143,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 				+ ",attackerid:" + "1").getBytes());
 		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		// need to come up with a way to end if the above try/catch fails
-		mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
+		//mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 	}
 
 	private void enableNdefExchangeMode() {
@@ -187,7 +183,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	            };
 	        }
 	    } else {
-	        finish();
+	    	Log.d("getNdefMessages", "Didn't find any Ndef messages");
 	    }
 	    return msgs;
 	}
@@ -235,6 +231,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
         	}
         	mCurrentStatus = "attack,attacker:" + InteractionHistory.getInstance().getDisplayName() + ",attackerid:" + InteractionHistory.getInstance().getDisplayName();
         	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
+        	Log.d("MainActivity", "mCurrentStatus: " + mCurrentStatus);
     		startActivityForResult(startNewActivityOpen, 0);
     		
     		ActionAvailability.getInstance().increaseCanAttack(60000);
@@ -291,6 +288,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	@Override
 	public NdefMessage createNdefMessage(NfcEvent event) {
         
+		Log.d("MainActivity", "in createNdefMessage");
         NdefMessage msg;
                 
                     msg = new NdefMessage(new NdefRecord[] {
@@ -303,11 +301,11 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
     
     private NdefRecord createApplicationRecord(byte[] payload)
     {    
-        String mimeType = "com.killerapprejji.MainActivity";        
+        String mimeType = "application/com.killerapprejji.MainActivity";        
 
         byte[] mimeBytes = mimeType.getBytes();    
 
-        NdefRecord mimeRecord = new NdefRecord(NdefRecord.TNF_EXTERNAL_TYPE, mimeBytes, new byte[0], payload);
+        NdefRecord mimeRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA, mimeBytes, new byte[0], payload);
         return  mimeRecord;
         
     }
