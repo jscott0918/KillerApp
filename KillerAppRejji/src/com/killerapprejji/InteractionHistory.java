@@ -49,8 +49,9 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 		return displayName;
 	}
 	
-	public String getId(){
-		return Secure.ANDROID_ID;
+	public String getId(Activity activity){
+		;		return Secure.getString(activity.getContentResolver(),
+                Secure.ANDROID_ID);
 	}
 	
 	public static InteractionHistory getInstance(){
