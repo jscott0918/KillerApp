@@ -9,13 +9,20 @@ import android.widget.EditText;
 
 public class SetInfo extends Activity {
 
-	Button button = null;
+	Button savebutton = null;
+	Button resetbutton = null;
 	EditText editTextObject = null;
-	OnClickListener onClickListener = new OnClickListener() {
+	OnClickListener saveonClickListener = new OnClickListener() {
 	    public void onClick(View v) {
 	    	saveButtonClick();
 	    }
 		
+	};
+	
+	OnClickListener resetonClickListener = new OnClickListener() {
+		public void onClick(View v) {
+			resetButtonClick();
+		}
 	};
 
 	/** Called when the activity is first created. */
@@ -23,8 +30,10 @@ public class SetInfo extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.set_player_info);
-	    button = (Button)findViewById(R.id.save_player_info_button);
-	    button.setOnClickListener(onClickListener);
+	    savebutton = (Button)findViewById(R.id.save_player_info_button);
+	    savebutton.setOnClickListener(saveonClickListener);
+	    resetbutton = (Button)findViewById(R.id.reset_score_button);
+	    resetbutton.setOnClickListener(resetonClickListener);
 	    editTextObject = (EditText)findViewById(R.id.display_name_edittext);
 	    if(InteractionHistory.getInstance().getDisplayName() != null){
 	    	editTextObject.setHint(InteractionHistory.getInstance().getDisplayName());
@@ -33,6 +42,11 @@ public class SetInfo extends Activity {
 	
 	private void saveButtonClick(){
 		InteractionHistory.getInstance().setDisplayName(editTextObject.getText().toString());
+		super.finish();
+	}
+	
+	private void resetButtonClick(){
+		//database.reset();
 		super.finish();
 	}
 
