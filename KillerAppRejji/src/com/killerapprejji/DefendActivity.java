@@ -7,7 +7,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.nfc.*;
 
 public class DefendActivity extends Activity{
