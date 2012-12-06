@@ -1,21 +1,27 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/TableLayout1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayInteractions" >
+    tools:context=".DisplayInteractions" >-->
     
-    <TextView android:id="@+id/total_kills"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:textSize="46sp"/>
-    
-    <TextView android:id="@+id/death_record"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:textSize="32sp"
-        android:text="XxX MLG pr0 Sniper N0Scope xXx" />
-
-</TableLayout>
+   	<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:scrollbars="none"
+       android:layout_weight="1"
+       android:orientation="vertical">
+       <LinearLayout
+           android:id="@+id/LinearLayout1"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+    			<TextView android:id="@+id/death_record"
+       			android:layout_width="wrap_content"
+        		android:layout_height="wrap_content"
+        		android:layout_marginTop="22dp"
+        		android:textSize="16sp"
+        		android:text="No Records Found" />
+    		</LinearLayout>
+    	</ScrollView>
+<!--</TableLayout>-->

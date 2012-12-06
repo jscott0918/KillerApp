@@ -1,6 +1,9 @@
 package com.killerapprejji;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;	
+import java.util.Date;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,15 +18,13 @@ import android.support.v4.app.NavUtils;
 public class DisplayInteractions extends Activity {
 	ArrayList<TableRow> rows = new ArrayList<TableRow>();
 	private SqlDatabaseHelper dbHelper = null;
-	
-	TextView deathhistory = null;
+	private TextView deathhistory = null;
 	
 	private final Handler mHandler = new Handler();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
 		setContentView(R.layout.table_layout);
 		dbHelper = new SqlDatabaseHelper(this);
 		deathhistory = (TextView)findViewById(R.id.death_record);
@@ -81,15 +82,18 @@ public class DisplayInteractions extends Activity {
 		if(history.size() ==0) {
 			return;
 		}
-		
+		deathhistory.setText("");
 		for(int i=0; i<history.size(); i++){
-			deathhistory.setText(constructEntry(history.get(i)) + "\n");
+			deathhistory.append(constructEntry(history.get(i)) + "\n");
 		}
 		
 	}
 	
 	private String constructEntry(Event e){
-		return ( e.getDateTime() + " " + e.getAttacker());
+		Date date = new Date(e.getDateTime());
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		String text = format.format(date);
+		return ( text + " " + e.getAttacker());
 	}
 	
 
