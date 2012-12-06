@@ -1,11 +1,11 @@
 package com.killerapprejji;
 
+import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import android.util.Log;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
-import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -59,16 +59,16 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
 			mNfcAdapter.setNdefPushMessageCallback(this, this);
 		}
-		if(getNdefMessages(getIntent()) != null){
-			Log.d("MainActivity", getNdefMessages(getIntent())[0].getRecords()[0].getPayload().toString());
-		}
+		//if(getNdefMessages(getIntent()) != null){
+		//	Log.d("MainActivity", getNdefMessages(getIntent())[0].getRecords()[0].getPayload().toString());
+	//	}
         setContentView(R.layout.activity_main);
     }
     
     protected void onPause(){
     	super.onPause();
     	if (mNfcAdapter != null){
-    		mNfcAdapter.disableForegroundDispatch(this);
+    		//mNfcAdapter.disableForegroundDispatch(this);
     	}
     }
     protected void onResume(){
@@ -108,9 +108,40 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	            intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
 	        if (rawMsgs != null) {
 	            msgs = new NdefMessage[rawMsgs.length];
-	            for (int i = 0; i < rawMsgs.length; i++) {
+	            for (int i = 0; i < rawMsgs.length; i++) {{
 	                msgs[i] = (NdefMessage) rawMsgs[i];
+	                byte[] typ = msgs[i].getRecords()[0].getType();
+	                byte[] payload = msgs[i].getRecords()[0].getPayload();
+	                String textEncoding = ((payload[0] & 0200) == 0) ? "UTF-8" : "UTF-16";
+	                int languageCodeLength = payload[0] & 0077;
+	                try {
+	                  @SuppressWarnings("unused")
+	                  String languageCode = new String(payload, 1,languageCodeLength,"US-ASCII");
+	                } catch (UnsupportedEncodingException e) {
+	                  // TODO Auto-generated catch block
+	                  e.printStackTrace();
+	                }
+	                String text = null;
+	                String mText = null;
+	                try {
+	                  text =new String(payload,languageCodeLength+1,payload.length
+	                    -languageCodeLength - 1, textEncoding);
+	                  Toast.makeText(getApplicationContext(),
+	                    text+"First Try",Toast.LENGTH_LONG).show();
+	                  mText = "Discovered tag "+text;
+	                } catch (UnsupportedEncodingException e) {
+	                  // TODO Auto-generated catch block
+	                  e.printStackTrace();
+	                  String val = new String(typ);
+	                  val+=new String(payload);
+	                  Toast.makeText(getApplicationContext(),
+	                    "Second"+val,Toast.LENGTH_LONG).show();
+	                }
+	                Log.i("Foreground dispatch", "Discovered tag with intent: " + intent);
+	                Log.d("getNdefMessages", "Discovered tag "+text);
+	              }
 	            }
+	            
 	        } else {
 	            // Unknown tag type
 	            byte[] empty = new byte[] {};
@@ -226,9 +257,27 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 		Log.d("MainActivity", "in createNdefMessage");
         NdefMessage msg;
 		Log.d("mCurrentStatus", "mCurrentStatus: " + mCurrentStatus);
+		String msgContents = mCurrentStatus.toString();
+	    byte[] languageCode = null;
+	    byte[] msgBytes = null;
+	    try {
+	        languageCode = "en".getBytes("US-ASCII");
+	        msgBytes = msgContents.getBytes("UTF-8");
+	    } catch (UnsupportedEncodingException e) {
+	        Log.e("Unsupported Encoding", "Cannot format message");
+	    }
+
+	    byte[] messagePayload = new byte[1 + languageCode.length
+	            + msgBytes.length];
+	    messagePayload[0] = (byte) 0x02; // status byte: UTF-8 encoding and
+	                                        // length of language code is 2
+	    System.arraycopy(languageCode, 0, messagePayload, 1,
+	            languageCode.length);
+	    System.arraycopy(msgBytes, 0, messagePayload, 1 + languageCode.length,
+	            msgBytes.length);
 
                     msg = new NdefMessage(new NdefRecord[] {
-                            createApplicationRecord(mCurrentStatus.getBytes())
+                            createApplicationRecord(messagePayload)
                     });
                     return msg;
                 

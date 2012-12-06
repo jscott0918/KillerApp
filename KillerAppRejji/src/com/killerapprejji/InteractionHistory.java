@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 
+
 public class InteractionHistory implements Serializable, UpdateInteraction{
 	/**
 	 * 
@@ -35,7 +36,7 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 	}
 	
 	public boolean setDisplayName(String name){
-		displayName = new String(name);
+		displayName = name;
 		return true;
 	}
 	

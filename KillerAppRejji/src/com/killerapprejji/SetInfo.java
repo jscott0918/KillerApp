@@ -2,6 +2,7 @@ package com.killerapprejji;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -26,12 +27,16 @@ public class SetInfo extends Activity {
 	    button = (Button)findViewById(R.id.save_player_info_button);
 	    button.setOnClickListener(onClickListener);
 	    editTextObject = (EditText)findViewById(R.id.display_name_edittext);
+		SqlDatabaseHelper sqlDB = new SqlDatabaseHelper(this);
+		Log.d("SetInfo", "sqlDB: " + sqlDB.getName());
 	    if(InteractionHistory.getInstance().getDisplayName() != null){
 	    	editTextObject.setHint(InteractionHistory.getInstance().getDisplayName());
 	    }
 	}
 	
 	private void saveButtonClick(){
+		SqlDatabaseHelper sqlDB = new SqlDatabaseHelper(this);
+		sqlDB.setName(editTextObject.getText().toString());
 		InteractionHistory.getInstance().setDisplayName(editTextObject.getText().toString());
 		super.finish();
 	}
