@@ -39,8 +39,8 @@ public class SetInfo extends Activity {
 	    resetbutton = (Button)findViewById(R.id.reset_score_button);
 	    resetbutton.setOnClickListener(resetonClickListener);
 	    editTextObject = (EditText)findViewById(R.id.display_name_edittext);
-	    if(InteractionHistory.getInstance().getDisplayName() != null){
-	    	editTextObject.setHint(InteractionHistory.getInstance().getDisplayName());
+	    if(InteractionHistory.getInstance().getDisplayName(this) != null){
+	    	editTextObject.setHint(InteractionHistory.getInstance().getDisplayName(this));
 	    }
 
 	}
