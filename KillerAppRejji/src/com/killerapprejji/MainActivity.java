@@ -33,14 +33,14 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	private static PendingIntent mNfcPendingIntent = null;
 	private static IntentFilter mNdefExchangeFilters[] = null;
 	public static final String EXTRA_MESSAGE = "com.killerappRejji.MainActivity.MESSAGE";
-	private static String mCurrentStatus = "idle,defender:" + InteractionHistory.getInstance().getDisplayName() + ",defenderid:" + InteractionHistory.getInstance().getDisplayName();
+	private static String mCurrentStatus = "idle,defender:" + InteractionHistory.getInstance().getDisplayName() + ",defenderid:" + InteractionHistory.getInstance().getId();
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         PendingIntent pendingIntent = PendingIntent.getActivity(
-        	    this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        	    this, 0, new Intent(this, getClass())/*.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)*/, 0);
         mNfcPendingIntent = pendingIntent;
         Log.d("MainActivity", "in onCreate");
 		// Intent filters for exchanging over p2p.
@@ -52,7 +52,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 		        ndef.addDataType("application/com.killerapprejji.*");
 		    }
 		    catch (MalformedMimeTypeException e) {
-		        throw new RuntimeException("fail", e);
+		    	Log.e("com.killerapprejji.MainActivity", "could not add ndef data type");
 		    }
 		   this.intentFiltersArray = new IntentFilter[] {ndef, };
 			mNdefExchangeFilters = new IntentFilter[] { ndefDetected,defendDetected };
@@ -103,7 +103,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 		NdefRecord[] ndefRecords = new NdefRecord[10];
 		ndefRecords[0] = NdefRecord.createMime("application/com.killerapprejji.NfcHandle", new String("attack,attacker:"
 				+ intHist.getDisplayName() 
-				+ ",attackerid:" + "1").getBytes());
+				+ ",attackerid:" + InteractionHistory.getInstance().getId()).getBytes());
 		attackNdefMessage = new NdefMessage(ndefRecords[0]);
 		//mNfcAdapter.setNdefPushMessage(attackNdefMessage, this);
 		//mNfcAdapter.setNdefPushMessageCallback(this, this);
@@ -226,10 +226,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
     	boolean ret = false;
     	if(ActionAvailability.getInstance().getCanAttack() < Calendar.getInstance().getTimeInMillis()){
     		Log.d("MainActivity", "starting onClickAttackButton");
-        	if(mNfcAdapter != null){
-        		setAttackMessage();
-        	}
-        	mCurrentStatus = "attack,attacker:" + InteractionHistory.getInstance().getDisplayName() + ",attackerid:" + InteractionHistory.getInstance().getDisplayName();
+        	mCurrentStatus = "attack,attacker:" + InteractionHistory.getInstance().getDisplayName() + ",attackerid:" + InteractionHistory.getInstance().getId();
         	Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
         	Log.d("MainActivity", "mCurrentStatus: " + mCurrentStatus);
     		startActivityForResult(startNewActivityOpen, 0);
@@ -247,11 +244,8 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
     public boolean onClickDefendButton(View view){
     	Log.d("MainActivity", "starting onClickDefendButton");
     	if(ActionAvailability.getInstance().getCanDefend() < Calendar.getInstance().getTimeInMillis()){
-	    	if(mNfcAdapter != null){
-	    		Log.d("MainActivity", "In mNfcAdapter != null");
-	    		setDefendMessage();
-	    	}
-	    	mCurrentStatus = "defend,defender:" + InteractionHistory.getInstance().getDisplayName() + ",defenderid:" + InteractionHistory.getInstance().getDisplayName();
+	    	mCurrentStatus = "defend,defender:" + InteractionHistory.getInstance().getDisplayName() + ",defenderid:" + InteractionHistory.getInstance().getId();
+        	Log.d("MainActivity", "mCurrentStatus: " + mCurrentStatus);
 	    	Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
 	    	startActivity(startNewActivityOpen);
 	    	ActionAvailability.getInstance().increaseCanDefend(60000);
@@ -290,7 +284,8 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
         
 		Log.d("MainActivity", "in createNdefMessage");
         NdefMessage msg;
-                
+		Log.d("mCurrentStatus", "mCurrentStatus: " + mCurrentStatus);
+
                     msg = new NdefMessage(new NdefRecord[] {
                             createApplicationRecord(mCurrentStatus.getBytes())
                     });
