@@ -154,7 +154,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 						Log.i("Foreground dispatch",
 								"Discovered tag with intent: " + intent);
 						Log.d("getNdefMessages", "Discovered tag " + text);
-						Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+						parseInteractionString(text);
 					}
 				}
 
@@ -173,6 +173,14 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 		return msgs;
 	}
 
+	public void parseInteractionString(String interaction){
+		String[] elements = interaction.split(",");
+		Log.d("parseInteractionString", "item 1:" + elements[0]);
+		Log.d("parseInteractionString", "item 2:" + elements[1]);
+		Log.d("parseInteractionString", "item 3:" + elements[2]);
+		if(elements)
+	}
+	
 	public void onClickViewHistory(View view) {
 		Intent startNewActivityOpen = new Intent(this,
 				DisplayInteractions.class);
@@ -234,9 +242,9 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 
 		//Log.d("MainActivity", "in createNdefMessage");
 		NdefMessage msg;
-		String msgContents ="idle,defender:"
+		String msgContents ="idle,"
 				+ InteractionHistory.getInstance().getDisplayName(this)
-				+ ",defenderid:" + InteractionHistory.getInstance().getId(this);
+				+ "," + InteractionHistory.getInstance().getId(this);
 		byte[] languageCode = null;
 		byte[] msgBytes = null;
 		try {

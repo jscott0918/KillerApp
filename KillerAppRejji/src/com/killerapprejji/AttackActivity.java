@@ -18,9 +18,9 @@ public class AttackActivity extends Activity implements
 		CreateNdefMessageCallback {
 	ProgressBar progressBar;
 	NfcAdapter mNfcAdapter;
-	String mCurrentStatus = "attack,attacker:"
+	String mCurrentStatus = "attack,"
 			+ InteractionHistory.getInstance().getDisplayName(this)
-			+ ",attackerid,"
+			+ ","
 			+ InteractionHistory.getInstance().getId(this);
 
 	@Override
