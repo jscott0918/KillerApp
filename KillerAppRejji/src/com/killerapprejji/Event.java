@@ -6,33 +6,34 @@ public class Event {
 	private String attackerId;
 	private String defender;
 	private String defenderId;
-	
-	public Event(long indatetime, String inattacker, String inattackerId, String indefender, String indefenderId){
+
+	public Event(long indatetime, String inattacker, String inattackerId,
+			String indefender, String indefenderId) {
 		datetime = indatetime;
 		attacker = inattacker;
 		attackerId = inattackerId;
 		defender = indefender;
 		defenderId = indefenderId;
 	}
-	
-	public long getDateTime(){
+
+	public long getDateTime() {
 		return datetime;
 	}
-	
-	public String getAttacker(){
+
+	public String getAttacker() {
 		return attacker;
 	}
-	
-	public String getDefender(){
+
+	public String getDefender() {
 		return defender;
 	}
-	public String getAttackerId(){
+
+	public String getAttackerId() {
 		return attackerId;
 	}
-	
-	public String getDefenderId(){
+
+	public String getDefenderId() {
 		return defenderId;
 	}
-	
 
 }

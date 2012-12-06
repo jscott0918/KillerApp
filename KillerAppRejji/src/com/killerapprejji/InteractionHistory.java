@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 
-public class InteractionHistory implements Serializable, UpdateInteraction{
+public class InteractionHistory implements Serializable, UpdateInteraction {
 	/**
 	 * 
 	 */
@@ -14,53 +14,56 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 	public static InteractionHistory interactionHistory = null;
 	private static ArrayList<Event> eventList;
 	private static String displayName = null;
-	//private NfcAdapter nfc;
-	
-	/*public void setNFC(Activity a){
-		nfc = NfcAdapter.getDefaultAdapter(a);
-		
-	}*/
-	
-	/*public NfcAdapter getNFC(){
-		return nfc;
-	}*/
-	
-	private InteractionHistory(){
+
+	// private NfcAdapter nfc;
+
+	/*
+	 * public void setNFC(Activity a){ nfc = NfcAdapter.getDefaultAdapter(a);
+	 * 
+	 * }
+	 */
+
+	/*
+	 * public NfcAdapter getNFC(){ return nfc; }
+	 */
+
+	private InteractionHistory() {
 		eventList = new ArrayList<Event>();
 	}
-	
-	public boolean addEvent(Event event){
+
+	public boolean addEvent(Event event) {
 		eventList.add(event);
 		return true;
 	}
-	
-	public boolean setDisplayName(String name){
-		displayName = new String(name);
+
+	public boolean setDisplayName(String name) {
+		displayName = name;
 		return true;
 	}
-	
-	public String getDisplayName(){
+
+	public String getDisplayName() {
 		return displayName;
 	}
-	
-	public String getId(Activity activity){
-		;		return Secure.getString(activity.getContentResolver(),
-                Secure.ANDROID_ID);
+
+	public String getId(Activity activity) {
+		;
+		return Secure.getString(activity.getContentResolver(),
+				Secure.ANDROID_ID);
 	}
-	
-	public static InteractionHistory getInstance(){
-		if(interactionHistory == null){
+
+	public static InteractionHistory getInstance() {
+		if (interactionHistory == null) {
 			interactionHistory = new InteractionHistory();
 		}
 		return interactionHistory;
 	}
-	
-	public ArrayList<Event> getEvent(String search){
+
+	public ArrayList<Event> getEvent(String search) {
 		ArrayList<Event> ret = new ArrayList<Event>();
-		for(Event e : eventList){
-			if(e.getAttacker().equals(search)){
+		for (Event e : eventList) {
+			if (e.getAttacker().equals(search)) {
 				ret.add(e);
-			} else if(e.getDefender().equals(search)){
+			} else if (e.getDefender().equals(search)) {
 				ret.add(e);
 			}
 		}
@@ -69,12 +72,11 @@ public class InteractionHistory implements Serializable, UpdateInteraction{
 
 	@Override
 	public boolean updateList(ArrayList<Event> update) {
-		for(Event e : update){
-			if(!eventList.contains(e)) 
+		for (Event e : update) {
+			if (!eventList.contains(e))
 				eventList.add(e);
 		}
 		return true;
 	}
-	
 
 }

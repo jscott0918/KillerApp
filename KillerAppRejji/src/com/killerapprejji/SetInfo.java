@@ -2,6 +2,7 @@ package com.killerapprejji;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -12,6 +13,7 @@ public class SetInfo extends Activity {
 	Button savebutton = null;
 	Button resetbutton = null;
 	EditText editTextObject = null;
+
 	OnClickListener saveonClickListener = new OnClickListener() {
 	    public void onClick(View v) {
 	    	saveButtonClick();
@@ -25,9 +27,11 @@ public class SetInfo extends Activity {
 		}
 	};
 
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.set_player_info);
 	    savebutton = (Button)findViewById(R.id.save_player_info_button);
@@ -38,10 +42,14 @@ public class SetInfo extends Activity {
 	    if(InteractionHistory.getInstance().getDisplayName() != null){
 	    	editTextObject.setHint(InteractionHistory.getInstance().getDisplayName());
 	    }
+
 	}
-	
-	private void saveButtonClick(){
-		InteractionHistory.getInstance().setDisplayName(editTextObject.getText().toString());
+
+	private void saveButtonClick() {
+		SqlDatabaseHelper sqlDB = new SqlDatabaseHelper(this);
+		sqlDB.setName(editTextObject.getText().toString());
+		InteractionHistory.getInstance().setDisplayName(
+				editTextObject.getText().toString());
 		super.finish();
 	}
 	
