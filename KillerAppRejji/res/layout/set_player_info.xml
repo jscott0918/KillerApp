@@ -10,11 +10,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="82dp"
+        android:layout_marginRight="82dp"
         android:onClick="saveButtonClick"
         android:text="@string/save" />
 
+    <Button
+        android:id="@+id/reset_score_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="82dp"
+        android:layout_marginLeft="250dp"
+        android:onClick="resetButtonClick"
+        android:text="@string/reset" />
+    
     <EditText
         android:id="@+id/display_name_edittext"
         android:layout_width="wrap_content"
@@ -25,14 +35,5 @@
         android:ems="10"
         android:hint="@string/username"
         android:inputType="textPersonName" />
-
-    <Switch
-        android:id="@+id/nfc_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/display_name_edittext"
-        android:layout_below="@+id/display_name_edittext"
-        android:layout_marginTop="33dp"
-        android:text="@string/toggle_nfc" />
 
 </RelativeLayout>
