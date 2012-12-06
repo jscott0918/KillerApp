@@ -14,8 +14,8 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
     private static final String USERNAME_TABLE_NAME = "usernames";
     private static final String DATABASE_NAME = "KillerAppDB";
     private static final String DICTIONARY_TABLE_CREATE =
-                "CREATE TABLE IF NOT EXISTS" + DICTIONARY_TABLE_NAME 
-                + " (" +
+                "CREATE TABLE IF NOT EXISTS " + DICTIONARY_TABLE_NAME 
+                + " ( " +
                 "attacker" + " TEXT, " +
                 "attackerid" + " VARCHAR(64), " +
                 "defender" + " TEXT, " +
@@ -23,8 +23,8 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
                 "timestamp" + " INT " +
                 ");";
     private static final String USERNAME_TABLE_CREATE = 
-    			"CREATE TABLE IF NOT EXISTS" + USERNAME_TABLE_NAME 
-    			+ " (" +
+    			"CREATE TABLE IF NOT EXISTS " + USERNAME_TABLE_NAME 
+    			+ " ( " +
     			"timestamp" + " DATETIME, " + 
     			"username" + " TEXT " +
     			");";
@@ -63,7 +63,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 	}
 	
 	public ArrayList<Event> getEvents(){
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor resultscursor;
 		ArrayList<Event> results = new ArrayList<Event>();
 		String[] columnNames = new String[5];
@@ -91,7 +91,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 	/* Set the username as entered in the settings */
 	public void setName(String name)
 	{
-		/* STUBBED */
+		
 	}
 	
 	/* Get the username from the database */
