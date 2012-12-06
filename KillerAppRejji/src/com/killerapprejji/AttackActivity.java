@@ -2,15 +2,12 @@ package com.killerapprejji;
 
 //testings
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.nfc.*;
 import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 

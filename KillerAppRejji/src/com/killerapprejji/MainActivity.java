@@ -175,10 +175,9 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 
 	public void parseInteractionString(String interaction){
 		String[] elements = interaction.split(",");
-		Log.d("parseInteractionString", "item 1:" + elements[0]);
-		Log.d("parseInteractionString", "item 2:" + elements[1]);
-		Log.d("parseInteractionString", "item 3:" + elements[2]);
-		if(elements)
+		Log.d("parseInteractionString", "item 1:" + elements[0]); //idle, defend, or attack
+		Log.d("parseInteractionString", "item 2:" + elements[1]); //displayName of opponent
+		Log.d("parseInteractionString", "item 3:" + elements[2]); //deviceId of opponent
 	}
 	
 	public void onClickViewHistory(View view) {
