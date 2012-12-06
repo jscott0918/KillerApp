@@ -87,10 +87,16 @@ public class DisplayInteractions extends Activity {
 	}
 
 	private String constructEntry(Event e) {
+		String ret = new String();
 		Date date = new Date(e.getDateTime());
-		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy | kk:mm", Locale.US);
 		String text = format.format(date);
-		return (text + " " + e.getAttacker());
+		if(e.getAttacker() == null || e.getAttacker().isEmpty()){
+			ret = "<no name>" + " | " + text;
+		} else {
+			ret = e.getAttacker() + " | " + text;
+		}
+		return ret;
 	}
 
 }

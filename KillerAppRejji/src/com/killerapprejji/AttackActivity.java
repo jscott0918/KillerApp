@@ -24,7 +24,7 @@ public class AttackActivity extends Activity implements
 		progressBar = (ProgressBar) findViewById(R.id.attack_progress_bar);
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		mCurrentStatus = "attack,"
-				+ InteractionHistory.getInstance().getDisplayName(this)
+				+ new SqlDatabaseHelper(this).getName()
 				+ ","
 				+ InteractionHistory.getInstance().getId(this);
 		// Create a timer object, along with a method to increment the progress

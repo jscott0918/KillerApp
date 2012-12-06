@@ -11,17 +11,20 @@
        android:scrollbars="none"
        android:layout_weight="1"
        android:orientation="vertical">
+
        <LinearLayout
            android:id="@+id/LinearLayout1"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:orientation="vertical">
-           		<TextView android:id="@+id/title"
-           		    android:layout_width="wrap_content"
-           		    android:layout_height="wrap_content"
-           		    android:layout_marginTop="22dp"
-           		    android:textSize="32sp"
-           		    android:text="@string/killed_by"/>
+           android:layout_width="600dp"
+           android:layout_height="835dp"
+           android:orientation="vertical" >
+
+           <TextView
+               android:id="@+id/title"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="22dp"
+               android:text="@string/killed_by"
+               android:textSize="56sp" />
            		
     			<TextView
     			    android:id="@+id/death_record"
@@ -29,7 +32,7 @@
     			    android:layout_height="wrap_content"
     			    android:layout_marginTop="50dp"
     			    android:text="@string/no_records_found"
-    			    android:textSize="46sp" />
+    			    android:textSize="36sp" />
 
     		</LinearLayout>
     	</ScrollView>
