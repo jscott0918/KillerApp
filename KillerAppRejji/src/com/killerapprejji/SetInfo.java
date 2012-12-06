@@ -54,7 +54,8 @@ public class SetInfo extends Activity {
 	}
 	
 	private void resetButtonClick(){
-		//database.reset();
+		SqlDatabaseHelper sqlDB = new SqlDatabaseHelper(this);
+		sqlDB.clearEvents();
 		super.finish();
 	}
 
