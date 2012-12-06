@@ -1,6 +1,7 @@
 package com.killerapprejji;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -25,7 +26,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
     private static final String USERNAME_TABLE_CREATE = 
     			"CREATE TABLE IF NOT EXISTS " + USERNAME_TABLE_NAME 
     			+ " ( " +
-    			"timestamp" + " DATETIME, " + 
+    			"timestamp" + " INT, " + 
     			"username" + " TEXT " +
     			");";
     
@@ -53,12 +54,12 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 				"INSERT INTO " + DICTIONARY_TABLE_NAME 
 				+ " (attacker, attackerid, defender, defenderid, timestamp) "
 				+ " VALUES ( " 
-					+ attack.getAttacker() + ", "
-					+ attack.getAttackerId() + ", "
-					+ attack.getDefender() + ", "
-					+ attack.getDefenderId() + ", "
-					+ attack.getDateTime() + ", "
-				+ " ) "
+					+ "\""+attack.getAttacker()+"\"" + ", "
+					+ "\""+attack.getAttackerId()+"\"" + ", "
+					+ "\""+attack.getDefender()+"\"" + ", "
+					+ "\""+attack.getDefenderId()+"\"" + ", "
+					+ attack.getDateTime() 
+					+ " ) "
 				);
 	}
 	
@@ -91,13 +92,28 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 	/* Set the username as entered in the settings */
 	public void setName(String name)
 	{
+		SQLiteDatabase db = this.getWritableDatabase();
+		long timestamp = Calendar.getInstance().getTimeInMillis();
+		db.execSQL(
+				"INSERT INTO " + USERNAME_TABLE_NAME +
+				" (timestamp, username) " +
+				" VALUES ( " +
+				timestamp + ", " +
+				"\""+name+"\"" + " )"
+				);
 		
 	}
 	
 	/* Get the username from the database */
 	public String getName()
 	{
-		/* STUBBED */
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor namecursor;
+		String[] columnNames = new String[1];
+		columnNames[0] = "username";
+		// fetch the top 1 row of usernames ordered by time descending
+		namecursor = db.query(USERNAME_TABLE_NAME, columnNames, null, null, null, null, "timestamp DESCENDING", "1");
+		
 		return "";
 	}
 }
