@@ -17,6 +17,8 @@
     <string name="reset">Reset</string>
     <string name="menu">Settings</string>
     <string name="toggle_nfc">Toggle NFC</string>
+    <string name="killed_by">Killed By</string>
+    <string name="no_records_found">No Records Found</string>
     <string name="title_activity_display_interactions">DisplayInteractions</string>
     <string name="defend_button">Defend!</string>
     <string name="view_interaction_history">View Stats</string>
