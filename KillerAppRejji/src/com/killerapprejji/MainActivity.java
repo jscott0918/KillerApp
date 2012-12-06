@@ -115,7 +115,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 		// Parse the intent
 		NdefMessage[] msgs = null;
 		String action = intent.getAction();
-		Log.d("getNdefMessages", "In getNdefmEssages");
+		Log.d("getNdefMessages", "In getNdefMessages");
 		if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
 				|| NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
 			Parcelable[] rawMsgs = intent
