@@ -14,16 +14,9 @@ import android.support.v4.app.NavUtils;
 
 public class DisplayInteractions extends Activity {
 	ArrayList<TableRow> rows = new ArrayList<TableRow>();
-	public SqlDatabaseHelper dbHelper = null;
+	private SqlDatabaseHelper dbHelper = null;
 	
 	TextView deathhistory = null;
-	
-	// Set up a handler to poll events when this activity is resumed
-	private final Runnable mUpdateScoreList = new Runnable() {
-		public void run() {
-			parseEvents(dbHelper.getEvents());
-		}
-	};
 	
 	private final Handler mHandler = new Handler();
 	
@@ -34,11 +27,18 @@ public class DisplayInteractions extends Activity {
 		setContentView(R.layout.table_layout);
 		dbHelper = new SqlDatabaseHelper(this);
 		deathhistory = (TextView)findViewById(R.id.death_record);
-		
+		parseEvents(dbHelper.getEvents());
 		// Show the Up button in the action bar.
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 	
+	
+	// Set up a handler to poll events when this activity is resumed
+	private final Runnable mUpdateScoreList = new Runnable() {
+		public void run() {
+			parseEvents(dbHelper.getEvents());
+		}
+	};
 	@Override
 	protected void onResume() {
 		mHandler.postDelayed(mUpdateScoreList, 10* 1000);
@@ -78,8 +78,12 @@ public class DisplayInteractions extends Activity {
 	
 
 	private void parseEvents(ArrayList<Event> history){
+		if(history.size() ==0) {
+			return;
+		}
+		
 		for(int i=0; i<history.size(); i++){
-			deathhistory.append(constructEntry(history.get(i)) + "\n");
+			deathhistory.setText(constructEntry(history.get(i)) + "\n");
 		}
 		
 	}
