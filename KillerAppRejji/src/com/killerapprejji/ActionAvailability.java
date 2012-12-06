@@ -17,10 +17,7 @@ public class ActionAvailability {
 
 	public static ActionAvailability getInstance() {
 		if (actionAvailability == null) {
-			actionAvailability = new ActionAvailability(Calendar.getInstance()
-					.getTimeInMillis(), Calendar.getInstance()
-					.getTimeInMillis(), Calendar.getInstance()
-					.getTimeInMillis());
+			actionAvailability = new ActionAvailability(0, 0, 0);
 		}
 		return actionAvailability;
 	}
