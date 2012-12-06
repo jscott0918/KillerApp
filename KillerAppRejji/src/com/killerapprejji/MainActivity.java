@@ -172,6 +172,21 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 		Log.d("parseInteractionString", "item 1:" + elements[0]); //idle, defend, or attack
 		Log.d("parseInteractionString", "item 2:" + elements[1]); //displayName of opponent
 		Log.d("parseInteractionString", "item 3:" + elements[2]); //deviceId of opponent
+		long currentTime = Calendar.getInstance().getTimeInMillis();
+		SqlDatabaseHelper sdbh = new SqlDatabaseHelper(this);
+		String myName = InteractionHistory.getInstance().getDisplayName(this);
+		String myID = InteractionHistory.getInstance().getId(this);
+		
+		if (elements[0].equals("attack")) {
+			if (currentTime >= ActionAvailability.getInstance().getCanBeAttacked()) {
+				sdbh.recordAttack(new Event(currentTime, elements[1], elements[2], myName, myID));
+				ActionAvailability.getInstance().increaseCanBeAttacked(60000);
+			}
+		} else if (elements[0].equals("defend")) {
+			sdbh.recordAttack(new Event(currentTime, myName, myID, elements[1], elements[2]));
+			ActionAvailability.getInstance().increaseCanAttack(60000);
+			ActionAvailability.getInstance().increaseCanDefend(0);
+		}
 	}
 	
 	public void onClickViewHistory(View view) {
