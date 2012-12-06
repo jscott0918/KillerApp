@@ -32,7 +32,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	private static NfcAdapter mNfcAdapter = null;
 	private static PendingIntent mNfcPendingIntent = null;
 	private static IntentFilter mNdefExchangeFilters[] = null;
-	public static final String EXTRA_MESSAGE = "com.killerappRejji.MainActivity.MESSAGE";
 	private static String mCurrentStatus;
 	
     @Override
@@ -97,17 +96,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	    else if("defend" == intent.getAction()){
 	    	Log.d("found defend intent", "toast message may pop up");
 	    }
-	}
-
-	private void enableNdefExchangeMode() {
-		try {
-			mNfcAdapter.setNdefPushMessage(new NdefMessage(new String().getBytes()),this);
-		} catch (FormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	    mNfcAdapter.enableForegroundDispatch(this, mNfcPendingIntent, 
-	        mNdefExchangeFilters, null);
 	}
 	
 	NdefMessage[] getNdefMessages(Intent intent) {
@@ -188,7 +176,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
     		ret = true;
     	}
     	else {
-    		Toast.makeText(getApplicationContext(), "Cannot attack until: " + new Date(ActionAvailability.getInstance().getCanAttack()), 3000).show();
+    		Toast.makeText(getApplicationContext(), "Cannot attack until: " + new Date(ActionAvailability.getInstance().getCanAttack()), Toast.LENGTH_LONG).show();
     		ret = false;
     	}
     	return ret;
@@ -204,7 +192,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	    	ActionAvailability.getInstance().increaseCanDefend(60000);
     	}
     	else {
-    		Toast.makeText(getApplicationContext(), "Cannot defend until: " + new Date(ActionAvailability.getInstance().getCanDefend()), 3000).show();
+    		Toast.makeText(getApplicationContext(), "Cannot defend until: " + new Date(ActionAvailability.getInstance().getCanDefend()), Toast.LENGTH_LONG).show();
     	}
     	return true;
     }

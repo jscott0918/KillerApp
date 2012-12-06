@@ -5,12 +5,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
-import android.nfc.NfcAdapter;
-import android.provider.Settings.Secure;
-import android.telephony.TelephonyManager;
-import android.widget.Toast;
 
 public class InteractionHistory implements Serializable, UpdateInteraction{
 	/**
