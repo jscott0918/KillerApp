@@ -76,6 +76,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		columnNames[4] = "timestamp";
 		
 		resultscursor = db.query(DICTIONARY_TABLE_NAME, columnNames, null, null, null, null, null);
+		if (resultscursor.moveToFirst() == false) return results;
 		while (!resultscursor.isAfterLast()) {
 			Event e = new Event(resultscursor.getLong(4),      // timestamp
 					            resultscursor.getString(0),    // attacker
@@ -113,7 +114,11 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		columnNames[0] = "username";
 		// fetch the top 1 row of usernames ordered by time descending
 		namecursor = db.query(USERNAME_TABLE_NAME, columnNames, null, null, null, null, "timestamp DESCENDING", "1");
+		if (namecursor.moveToFirst() == false) {
+			return "";
+		} else {
+			return namecursor.getString(0);
+		}
 		
-		return "";
 	}
 }
