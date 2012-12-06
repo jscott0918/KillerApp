@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 
 public class InteractionHistory implements Serializable, UpdateInteraction {
 	/**
@@ -41,7 +42,9 @@ public class InteractionHistory implements Serializable, UpdateInteraction {
 		return true;
 	}
 
-	public String getDisplayName() {
+	public String getDisplayName(Context context) {
+		SqlDatabaseHelper sqlDB = new SqlDatabaseHelper(context);
+		displayName = sqlDB.getName();
 		return displayName;
 	}
 

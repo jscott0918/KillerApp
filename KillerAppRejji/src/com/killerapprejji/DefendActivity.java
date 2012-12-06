@@ -19,9 +19,9 @@ public class DefendActivity extends Activity implements
 	boolean flag = false;
 	NfcAdapter mNfcAdapter;
 	String mCurrentStatus = "defend,defender:"
-			+ InteractionHistory.getInstance().getDisplayName()
+			+ InteractionHistory.getInstance().getDisplayName(this)
 			+ ",defenderid,"
-			+ InteractionHistory.getInstance().getDisplayName();
+			+ InteractionHistory.getInstance().getId(this);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

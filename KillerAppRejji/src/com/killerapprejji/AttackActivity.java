@@ -19,9 +19,9 @@ public class AttackActivity extends Activity implements
 	ProgressBar progressBar;
 	NfcAdapter mNfcAdapter;
 	String mCurrentStatus = "attack,attacker:"
-			+ InteractionHistory.getInstance().getDisplayName()
+			+ InteractionHistory.getInstance().getDisplayName(this)
 			+ ",attackerid,"
-			+ InteractionHistory.getInstance().getDisplayName();
+			+ InteractionHistory.getInstance().getId(this);
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

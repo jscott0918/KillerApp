@@ -37,9 +37,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mCurrentStatus = "idle,defender:"
-				+ InteractionHistory.getInstance().getDisplayName()
-				+ ",defenderid:" + InteractionHistory.getInstance().getId(this);
+
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
 				new Intent(this, getClass())/*
@@ -68,10 +66,8 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 					defendDetected };
 			mNfcAdapter.setNdefPushMessageCallback(this, this);
 		}
-		// if(getNdefMessages(getIntent()) != null){
-		// Log.d("MainActivity",
-		// getNdefMessages(getIntent())[0].getRecords()[0].getPayload().toString());
-		// }
+		getNdefMessages(getIntent());
+		 
 		setContentView(R.layout.activity_main);
 	}
 
@@ -90,8 +86,13 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 							NfcF.class.getName(), NfcA.class.getName(),
 							NfcB.class.getName() } });
 			mNfcAdapter.setNdefPushMessageCallback(this, this);
+			getNdefMessages(getIntent());
 
 		}
+		mCurrentStatus = "idle,defender:"
+				+ InteractionHistory.getInstance().getDisplayName(this)
+				+ ",defenderid:" + InteractionHistory.getInstance().getId(this);
+
 	}
 
 	protected void onNewIntent(Intent intent) {
@@ -114,6 +115,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 		// Parse the intent
 		NdefMessage[] msgs = null;
 		String action = intent.getAction();
+		Log.d("getNdefMessages", "In getNdefmEssages");
 		if (NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
 				|| NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
 			Parcelable[] rawMsgs = intent
@@ -141,9 +143,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 							text = new String(payload, languageCodeLength + 1,
 									payload.length - languageCodeLength - 1,
 									textEncoding);
-							Toast.makeText(getApplicationContext(),
-									text + "First Try", Toast.LENGTH_LONG)
-									.show();
 						} catch (UnsupportedEncodingException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -155,11 +154,13 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 						Log.i("Foreground dispatch",
 								"Discovered tag with intent: " + intent);
 						Log.d("getNdefMessages", "Discovered tag " + text);
+						Toast.makeText(this, text, Toast.LENGTH_LONG).show();
 					}
 				}
 
 			} else {
 				// Unknown tag type
+				Log.d("Unknown Tag", "Unknown tag");
 				byte[] empty = new byte[] {};
 				NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN,
 						empty, empty, empty);
@@ -195,12 +196,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 		if (ActionAvailability.getInstance().getCanAttack() < Calendar
 				.getInstance().getTimeInMillis()) {
 			Log.d("MainActivity", "starting onClickAttackButton");
-			mCurrentStatus = "attack,attacker:"
-					+ InteractionHistory.getInstance().getDisplayName()
-					+ ",attackerid:"
-					+ InteractionHistory.getInstance().getId(this);
 			Intent startNewActivityOpen = new Intent(this, AttackActivity.class);
-			Log.d("MainActivity", "mCurrentStatus: " + mCurrentStatus);
 			startActivityForResult(startNewActivityOpen, 0);
 
 			ActionAvailability.getInstance().increaseCanAttack(60000);
@@ -220,11 +216,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 		Log.d("MainActivity", "starting onClickDefendButton");
 		if (ActionAvailability.getInstance().getCanDefend() < Calendar
 				.getInstance().getTimeInMillis()) {
-			mCurrentStatus = "defend,defender:"
-					+ InteractionHistory.getInstance().getDisplayName()
-					+ ",defenderid:"
-					+ InteractionHistory.getInstance().getId(this);
-			Log.d("MainActivity", "mCurrentStatus: " + mCurrentStatus);
 			Intent startNewActivityOpen = new Intent(this, DefendActivity.class);
 			startActivity(startNewActivityOpen);
 			ActionAvailability.getInstance().increaseCanDefend(60000);
@@ -241,10 +232,11 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 	@Override
 	public NdefMessage createNdefMessage(NfcEvent event) {
 
-		Log.d("MainActivity", "in createNdefMessage");
+		//Log.d("MainActivity", "in createNdefMessage");
 		NdefMessage msg;
-		Log.d("mCurrentStatus", "mCurrentStatus: " + mCurrentStatus);
-		String msgContents = mCurrentStatus.toString();
+		String msgContents ="idle,defender:"
+				+ InteractionHistory.getInstance().getDisplayName(this)
+				+ ",defenderid:" + InteractionHistory.getInstance().getId(this);
 		byte[] languageCode = null;
 		byte[] msgBytes = null;
 		try {

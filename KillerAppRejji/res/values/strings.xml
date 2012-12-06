@@ -22,5 +22,6 @@
     <string name="Stats">Stats</string>
     <string name="title_activity_nfc_handle">NfcHandle</string>
     <string name="nfc">NFC</string>
+    <string name="activity_name_main_activity">MainActivity</string>
 
 </resources>
