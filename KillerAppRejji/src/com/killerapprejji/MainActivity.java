@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import android.util.Log;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -32,7 +30,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 	private static NfcAdapter mNfcAdapter = null;
 	private static PendingIntent mNfcPendingIntent = null;
 	private static IntentFilter mNdefExchangeFilters[] = null;
-	private static String mCurrentStatus;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,10 +86,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 			getNdefMessages(getIntent());
 
 		}
-		mCurrentStatus = "idle,defender:"
-				+ InteractionHistory.getInstance().getDisplayName(this)
-				+ ",defenderid:" + InteractionHistory.getInstance().getId(this);
-
+		
 	}
 
 	protected void onNewIntent(Intent intent) {
