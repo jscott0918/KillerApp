@@ -15,10 +15,7 @@ public class AttackActivity extends Activity implements
 		CreateNdefMessageCallback {
 	ProgressBar progressBar;
 	NfcAdapter mNfcAdapter;
-	String mCurrentStatus = "attack,"
-			+ InteractionHistory.getInstance().getDisplayName(this)
-			+ ","
-			+ InteractionHistory.getInstance().getId(this);
+	String mCurrentStatus;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -26,6 +23,10 @@ public class AttackActivity extends Activity implements
 		setContentView(R.layout.activity_attack);
 		progressBar = (ProgressBar) findViewById(R.id.attack_progress_bar);
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+		mCurrentStatus = "attack,"
+				+ InteractionHistory.getInstance().getDisplayName(this)
+				+ ","
+				+ InteractionHistory.getInstance().getId(this);
 		// Create a timer object, along with a method to increment the progress
 		// bar.
 		if (mNfcAdapter != null) {

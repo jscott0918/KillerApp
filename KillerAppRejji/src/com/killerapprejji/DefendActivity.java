@@ -18,10 +18,7 @@ public class DefendActivity extends Activity implements
 	NfcAdapter nfc;
 	boolean flag = false;
 	NfcAdapter mNfcAdapter;
-	String mCurrentStatus = "defend,"
-			+ InteractionHistory.getInstance().getDisplayName(this)
-			+ ","
-			+ InteractionHistory.getInstance().getId(this);
+	String mCurrentStatus;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -31,6 +28,10 @@ public class DefendActivity extends Activity implements
 		// Create a timer object, along with a method to increment the progress
 		// bar.
 		final Timer timer = new Timer();
+		mCurrentStatus = "defend,"
+				+ InteractionHistory.getInstance().getDisplayName(this)
+				+ ","
+				+ InteractionHistory.getInstance().getId(this);
 		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 		// Create a timer object, along with a method to increment the progress
 		// bar.

@@ -16,17 +16,6 @@ public class InteractionHistory implements Serializable, UpdateInteraction {
 	private static ArrayList<Event> eventList;
 	private static String displayName = null;
 
-	// private NfcAdapter nfc;
-
-	/*
-	 * public void setNFC(Activity a){ nfc = NfcAdapter.getDefaultAdapter(a);
-	 * 
-	 * }
-	 */
-
-	/*
-	 * public NfcAdapter getNFC(){ return nfc; }
-	 */
 
 	private InteractionHistory() {
 		eventList = new ArrayList<Event>();
