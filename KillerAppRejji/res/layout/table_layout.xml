@@ -5,11 +5,17 @@
     android:layout_height="match_parent"
     tools:context=".DisplayInteractions" >
     
-    <TextView android:id="@+id/kill_record"
+    <TextView android:id="@+id/total_kills"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:text="" />
+        android:layout_marginTop="22dp"
+        android:textSize="46sp"/>
+    
+    <TextView android:id="@+id/death_record"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:textSize="46sp"
+        android:text="XxX MLG pr0 Sniper N0Scope xXx" />
 
 </TableLayout>

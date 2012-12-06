@@ -1,6 +1,7 @@
 package com.killerapprejji;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -14,8 +15,8 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
     private static final String USERNAME_TABLE_NAME = "usernames";
     private static final String DATABASE_NAME = "KillerAppDB";
     private static final String DICTIONARY_TABLE_CREATE =
-                "CREATE TABLE IF NOT EXISTS" + DICTIONARY_TABLE_NAME 
-                + " (" +
+                "CREATE TABLE IF NOT EXISTS " + DICTIONARY_TABLE_NAME 
+                + " ( " +
                 "attacker" + " TEXT, " +
                 "attackerid" + " VARCHAR(64), " +
                 "defender" + " TEXT, " +
@@ -23,9 +24,9 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
                 "timestamp" + " INT " +
                 ");";
     private static final String USERNAME_TABLE_CREATE = 
-    			"CREATE TABLE IF NOT EXISTS" + USERNAME_TABLE_NAME 
-    			+ " (" +
-    			"timestamp" + " DATETIME, " + 
+    			"CREATE TABLE IF NOT EXISTS " + USERNAME_TABLE_NAME 
+    			+ " ( " +
+    			"timestamp" + " INT, " + 
     			"username" + " TEXT " +
     			");";
     
@@ -53,17 +54,17 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 				"INSERT INTO " + DICTIONARY_TABLE_NAME 
 				+ " (attacker, attackerid, defender, defenderid, timestamp) "
 				+ " VALUES ( " 
-					+ attack.getAttacker() + ", "
-					+ attack.getAttackerId() + ", "
-					+ attack.getDefender() + ", "
-					+ attack.getDefenderId() + ", "
-					+ attack.getDateTime() + ", "
-				+ " ) "
+					+ "\""+attack.getAttacker()+"\"" + ", "
+					+ "\""+attack.getAttackerId()+"\"" + ", "
+					+ "\""+attack.getDefender()+"\"" + ", "
+					+ "\""+attack.getDefenderId()+"\"" + ", "
+					+ attack.getDateTime() 
+					+ " ) "
 				);
 	}
 	
 	public ArrayList<Event> getEvents(){
-		SQLiteDatabase db = this.getWritableDatabase();
+		SQLiteDatabase db = this.getReadableDatabase();
 		Cursor resultscursor;
 		ArrayList<Event> results = new ArrayList<Event>();
 		String[] columnNames = new String[5];
@@ -75,6 +76,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		columnNames[4] = "timestamp";
 		
 		resultscursor = db.query(DICTIONARY_TABLE_NAME, columnNames, null, null, null, null, null);
+		if (resultscursor.moveToFirst() == false) return results;
 		while (!resultscursor.isAfterLast()) {
 			Event e = new Event(resultscursor.getLong(4),      // timestamp
 					            resultscursor.getString(0),    // attacker
@@ -91,13 +93,32 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 	/* Set the username as entered in the settings */
 	public void setName(String name)
 	{
-		/* STUBBED */
+		SQLiteDatabase db = this.getWritableDatabase();
+		long timestamp = Calendar.getInstance().getTimeInMillis();
+		db.execSQL(
+				"INSERT INTO " + USERNAME_TABLE_NAME +
+				" (timestamp, username) " +
+				" VALUES ( " +
+				timestamp + ", " +
+				"\""+name+"\"" + " )"
+				);
+		
 	}
 	
 	/* Get the username from the database */
 	public String getName()
 	{
-		/* STUBBED */
-		return "";
+		SQLiteDatabase db = this.getReadableDatabase();
+		Cursor namecursor;
+		String[] columnNames = new String[1];
+		columnNames[0] = "username";
+		// fetch the top 1 row of usernames ordered by time descending
+		namecursor = db.query(USERNAME_TABLE_NAME, columnNames, null, null, null, null, "timestamp DESCENDING", "1");
+		if (namecursor.moveToFirst() == false) {
+			return "";
+		} else {
+			return namecursor.getString(0);
+		}
+		
 	}
 }
