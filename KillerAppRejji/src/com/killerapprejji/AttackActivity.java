@@ -1,69 +1,100 @@
 package com.killerapprejji;
+
 //testings
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.nfc.*;
+import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 
-public class AttackActivity extends Activity{
+public class AttackActivity extends Activity implements
+		CreateNdefMessageCallback {
 	ProgressBar progressBar;
-	NfcAdapter nfc;
+	NfcAdapter mNfcAdapter;
+	String mCurrentStatus = "attack,attacker:"
+			+ InteractionHistory.getInstance().getDisplayName()
+			+ ",attackerid,"
+			+ InteractionHistory.getInstance().getDisplayName();
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);    
-        setContentView(R.layout.activity_attack);
-        progressBar = (ProgressBar) findViewById(R.id.attack_progress_bar);
-        // Create a timer object, along with a method to increment the progress bar.
-        doNFCTask();
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_attack);
+		progressBar = (ProgressBar) findViewById(R.id.attack_progress_bar);
+		mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+		// Create a timer object, along with a method to increment the progress
+		// bar.
+		if (mNfcAdapter != null) {
+			mNfcAdapter.setNdefPushMessageCallback(this, this);
+		}
 		final Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask(){
-			public void run(){
-		        // have the timer schedule the progress bar to update at a fixed interval.
-				progressBar.incrementProgressBy(progressBar.getMax()/15);
+		timer.scheduleAtFixedRate(new TimerTask() {
+			public void run() {
+				// have the timer schedule the progress bar to update at a fixed
+				// interval.
+				progressBar.incrementProgressBy(progressBar.getMax() / 15);
 				// If time runs out, return to main menu
-				if (progressBar.getProgress() == progressBar.getMax())
-				{
+				if (progressBar.getProgress() == progressBar.getMax()) {
 					callFinish();
 				}
-		        // if a communications interrupt is received, cancel the timer and handle the communication
-		        //initiateNFCAttack();
+				// if a communications interrupt is received, cancel the timer
+				// and handle the communication
+				// initiateNFCAttack();
 			}
 		}, 0, 1000);
-        this.setResult(0);
+		this.setResult(0);
 	}
-	
-	private void callFinish(){
+
+	private void callFinish() {
 		finish();
 	}
 
-	private void doNFCTask(){
-		
-		NdefRecord mimeRecord = NdefRecord.createMime("application/com.killerapprejji.attack",
-			    new String("attacker:" + ",attackerid:" + "").getBytes(Charset.forName("US-ASCII")));
-	}
-	private void initiateNFCAttack(){
-		// create NFC adapter
-		nfc = NfcAdapter.getDefaultAdapter(getParent());
-		if (nfc == null) {
-			//not sure what "Toast" is, but the example uses it
-			Toast.makeText(this, "NFC not available.", Toast.LENGTH_LONG).show();
-			//finish();
-			return;
-		}
-		// create and send message
-		String attackMessage = new String("Attack," + InteractionHistory.getInstance().getDisplayName());
+	@Override
+	public NdefMessage createNdefMessage(NfcEvent event) {
+
+		Log.d("MainActivity", "in createNdefMessage");
+		NdefMessage msg;
+		Log.d("mCurrentStatus", "mCurrentStatus: " + mCurrentStatus);
+		String msgContents = mCurrentStatus.toString();
+		byte[] languageCode = null;
+		byte[] msgBytes = null;
 		try {
-			nfc.setNdefPushMessage(new NdefMessage(attackMessage.getBytes()), this.getParent());
-		} catch (FormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			languageCode = "en".getBytes("US-ASCII");
+			msgBytes = msgContents.getBytes("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			Log.e("Unsupported Encoding", "Cannot format message");
 		}
+
+		byte[] messagePayload = new byte[1 + languageCode.length
+				+ msgBytes.length];
+		messagePayload[0] = (byte) 0x02; // status byte: UTF-8 encoding and
+											// length of language code is 2
+		System.arraycopy(languageCode, 0, messagePayload, 1,
+				languageCode.length);
+		System.arraycopy(msgBytes, 0, messagePayload, 1 + languageCode.length,
+				msgBytes.length);
+
+		msg = new NdefMessage(
+				new NdefRecord[] { createApplicationRecord(messagePayload) });
+		return msg;
+
+	}
+
+	private NdefRecord createApplicationRecord(byte[] payload) {
+		String mimeType = "application/com.killerapprejji.MainActivity";
+
+		byte[] mimeBytes = mimeType.getBytes();
+
+		NdefRecord mimeRecord = new NdefRecord(NdefRecord.TNF_MIME_MEDIA,
+				mimeBytes, new byte[0], payload);
+		return mimeRecord;
+
 	}
 }
-
-
