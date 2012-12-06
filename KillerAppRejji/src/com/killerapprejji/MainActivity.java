@@ -122,13 +122,11 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback{
 	                  e.printStackTrace();
 	                }
 	                String text = null;
-	                String mText = null;
 	                try {
 	                  text =new String(payload,languageCodeLength+1,payload.length
 	                    -languageCodeLength - 1, textEncoding);
 	                  Toast.makeText(getApplicationContext(),
 	                    text+"First Try",Toast.LENGTH_LONG).show();
-	                  mText = "Discovered tag "+text;
 	                } catch (UnsupportedEncodingException e) {
 	                  // TODO Auto-generated catch block
 	                  e.printStackTrace();
