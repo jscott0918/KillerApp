@@ -119,6 +119,13 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		} else {
 			return namecursor.getString(0);
 		}
-		
+	}
+	
+	/* Clear the database of all attacks */
+	public void clearEvents()
+	{
+		SQLiteDatabase db = this.getReadableDatabase();
+		db.delete(DICTIONARY_TABLE_NAME, null, null);
+		db.execSQL(DICTIONARY_TABLE_CREATE);
 	}
 }
