@@ -1,6 +1,9 @@
 package com.killerapprejji;
 
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;	
+import java.util.Date;
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,9 +16,22 @@ import android.support.v4.app.NavUtils;
 
 public class DisplayInteractions extends Activity {
 	ArrayList<TableRow> rows = new ArrayList<TableRow>();
-	public SqlDatabaseHelper dbHelper = null;
+	private SqlDatabaseHelper dbHelper = null;
+	private TextView deathhistory = null;
 	
-	TextView deathhistory = null;
+	private final Handler mHandler = new Handler();
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.table_layout);
+		dbHelper = new SqlDatabaseHelper(this);
+		deathhistory = (TextView)findViewById(R.id.death_record);
+		parseEvents(dbHelper.getEvents());
+		// Show the Up button in the action bar.
+		//getActionBar().setDisplayHomeAsUpEnabled(true);
+	}
+	
 	
 	// Set up a handler to poll events when this activity is resumed
 	private final Runnable mUpdateScoreList = new Runnable() {
@@ -23,21 +39,6 @@ public class DisplayInteractions extends Activity {
 			parseEvents(dbHelper.getEvents());
 		}
 	};
-	
-	private final Handler mHandler = new Handler();
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		
-		setContentView(R.layout.table_layout);
-		dbHelper = new SqlDatabaseHelper(this);
-		deathhistory = (TextView)findViewById(R.id.death_record);
-		
-		// Show the Up button in the action bar.
-		//getActionBar().setDisplayHomeAsUpEnabled(true);
-	}
-	
 	@Override
 	protected void onResume() {
 		mHandler.postDelayed(mUpdateScoreList, 10* 1000);
@@ -77,6 +78,10 @@ public class DisplayInteractions extends Activity {
 	
 
 	private void parseEvents(ArrayList<Event> history){
+		if(history.size() ==0) {
+			return;
+		}
+		deathhistory.setText("");
 		for(int i=0; i<history.size(); i++){
 			deathhistory.append(constructEntry(history.get(i)) + "\n");
 		}
@@ -84,7 +89,10 @@ public class DisplayInteractions extends Activity {
 	}
 	
 	private String constructEntry(Event e){
-		return ( e.getDateTime() + " " + e.getAttacker());
+		Date date = new Date(e.getDateTime());
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		String text = format.format(date);
+		return ( text + " " + e.getAttacker());
 	}
 	
 
