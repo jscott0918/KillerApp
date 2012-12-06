@@ -2,15 +2,12 @@ package com.killerapprejji;
 
 //testings
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 import android.nfc.*;
 import android.nfc.NfcAdapter.CreateNdefMessageCallback;
 
@@ -18,9 +15,9 @@ public class AttackActivity extends Activity implements
 		CreateNdefMessageCallback {
 	ProgressBar progressBar;
 	NfcAdapter mNfcAdapter;
-	String mCurrentStatus = "attack,attacker:"
+	String mCurrentStatus = "attack,"
 			+ InteractionHistory.getInstance().getDisplayName(this)
-			+ ",attackerid,"
+			+ ","
 			+ InteractionHistory.getInstance().getId(this);
 
 	@Override

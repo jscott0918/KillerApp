@@ -4,8 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import android.util.Log;
 import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -32,7 +30,6 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 	private static NfcAdapter mNfcAdapter = null;
 	private static PendingIntent mNfcPendingIntent = null;
 	private static IntentFilter mNdefExchangeFilters[] = null;
-	private static String mCurrentStatus;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,10 +86,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 			getNdefMessages(getIntent());
 
 		}
-		mCurrentStatus = "idle,defender:"
-				+ InteractionHistory.getInstance().getDisplayName(this)
-				+ ",defenderid:" + InteractionHistory.getInstance().getId(this);
-
+		
 	}
 
 	protected void onNewIntent(Intent intent) {
@@ -154,7 +148,7 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 						Log.i("Foreground dispatch",
 								"Discovered tag with intent: " + intent);
 						Log.d("getNdefMessages", "Discovered tag " + text);
-						Toast.makeText(this, text, Toast.LENGTH_LONG).show();
+						parseInteractionString(text);
 					}
 				}
 
@@ -173,6 +167,13 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 		return msgs;
 	}
 
+	public void parseInteractionString(String interaction){
+		String[] elements = interaction.split(",");
+		Log.d("parseInteractionString", "item 1:" + elements[0]); //idle, defend, or attack
+		Log.d("parseInteractionString", "item 2:" + elements[1]); //displayName of opponent
+		Log.d("parseInteractionString", "item 3:" + elements[2]); //deviceId of opponent
+	}
+	
 	public void onClickViewHistory(View view) {
 		Intent startNewActivityOpen = new Intent(this,
 				DisplayInteractions.class);
@@ -234,9 +235,9 @@ public class MainActivity extends Activity implements CreateNdefMessageCallback 
 
 		//Log.d("MainActivity", "in createNdefMessage");
 		NdefMessage msg;
-		String msgContents ="idle,defender:"
+		String msgContents ="idle,"
 				+ InteractionHistory.getInstance().getDisplayName(this)
-				+ ",defenderid:" + InteractionHistory.getInstance().getId(this);
+				+ "," + InteractionHistory.getInstance().getId(this);
 		byte[] languageCode = null;
 		byte[] msgBytes = null;
 		try {
