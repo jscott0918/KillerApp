@@ -14,9 +14,9 @@ import android.support.v4.app.NavUtils;
 
 public class DisplayInteractions extends Activity {
 	ArrayList<TableRow> rows = new ArrayList<TableRow>();
-	private SqlDatabaseHelper dbHelper = null;
+	public SqlDatabaseHelper dbHelper = null;
 	
-	TextView textview = null;
+	TextView deathhistory = null;
 	
 	// Set up a handler to poll events when this activity is resumed
 	private final Runnable mUpdateScoreList = new Runnable() {
@@ -33,7 +33,7 @@ public class DisplayInteractions extends Activity {
 		
 		setContentView(R.layout.table_layout);
 		dbHelper = new SqlDatabaseHelper(this);
-		textview = (TextView)findViewById(R.id.kill_record);
+		deathhistory = (TextView)findViewById(R.id.death_record);
 		
 		// Show the Up button in the action bar.
 		//getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -79,12 +79,13 @@ public class DisplayInteractions extends Activity {
 
 	private void parseEvents(ArrayList<Event> history){
 		for(int i=0; i<history.size(); i++){
-			textview.append(constructEntry(history.get(i)) + "\n");
+			deathhistory.append(constructEntry(history.get(i)) + "\n");
 		}
+		
 	}
 	
 	private String constructEntry(Event e){
-		return ( e.getDateTime() + " " + e.getAttacker() + " " + e.getDefender() );
+		return ( e.getDateTime() + " " + e.getAttacker());
 	}
 	
 
