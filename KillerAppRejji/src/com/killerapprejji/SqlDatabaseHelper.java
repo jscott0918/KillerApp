@@ -113,7 +113,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 		String[] columnNames = new String[1];
 		columnNames[0] = "username";
 		// fetch the top 1 row of usernames ordered by time descending
-		namecursor = db.query(USERNAME_TABLE_NAME, columnNames, null, null, null, null, "timestamp DESCENDING", "1");
+		namecursor = db.query(USERNAME_TABLE_NAME, columnNames, null, null, null, null, "timestamp DESC", "1");
 		if (namecursor.moveToFirst() == false) {
 			return "";
 		} else {
@@ -125,6 +125,7 @@ public class SqlDatabaseHelper extends SQLiteOpenHelper {
 	public void clearEvents()
 	{
 		SQLiteDatabase db = this.getReadableDatabase();
+		//delete and recreate table (convention, according to stackoverflow)
 		db.delete(DICTIONARY_TABLE_NAME, null, null);
 		db.execSQL(DICTIONARY_TABLE_CREATE);
 	}
